@@ -1,9 +1,12 @@
 {
   "name": "svardmailapp",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "author": "Kristofer Svärd <kristofer@svard.net>",
   "dependencies": {
     "express": "~3.0.0",
-    "ejs": "~0.8.4"
+    "ejs": "~0.8.4",
+    "imap": "~0.8.1",
+    "log4js": "~0.6.6"
     },
   "devDependencies": {
     "grunt": "~0.4.1",

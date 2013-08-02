@@ -1,25 +1,40 @@
-var express = require("express");
+var express = require('express'),
+	log4js = require('log4js');
  
 var app = express();
-app.use(express.logger());
+// app.use(express.logger());
 
 // Configuration
 
-app.configure(function(){
-  app.set('views', __dirname + '/app');
-  //app.set('view engine', 'jade');
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(express.static(__dirname + '/app'));
-  app.use(app.router);
-  app.engine('html', require('ejs').renderFile);
+log4js.configure({
+    appenders: [
+        { type: 'console',
+          category: 'dev' },
+        { type: 'file', 
+          filename: 'logs/server.log', 
+          category: 'svard-mail-server',
+          maxLogSize: 10240,
+          backups: 3 }
+    ]
 });
 
-app.get('/', function(request, response) {
-  response.render('index.html')
+// var logger = log4js.getLogger('svard-mail-server');
+var logger = log4js.getLogger('dev');
+logger.setLevel('DEBUG');
+
+app.configure(function(){
+    app.set('views', __dirname + '/app');
+    //app.set('view engine', 'jade');
+    app.use(express.bodyParser());
+    app.use(express.methodOverride());
+    app.use(express.static(__dirname + '/app'));
+    app.use(app.router);
+    app.engine('html', require('ejs').renderFile);
 });
+
+require('./routes/routes')(app, logger);
 
 var port = process.env.PORT || 5000;
 app.listen(port, function() {
-  console.log("Listening on " + port);
+    logger.info('Listening on ' + port);
 });
