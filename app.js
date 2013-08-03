@@ -1,6 +1,8 @@
+'use strict';
+
 var express = require('express'),
 	log4js = require('log4js');
- 
+
 var app = express();
 // app.use(express.logger());
 
@@ -10,8 +12,8 @@ log4js.configure({
     appenders: [
         { type: 'console',
           category: 'dev' },
-        { type: 'file', 
-          filename: 'logs/server.log', 
+        { type: 'file',
+          filename: 'logs/server.log',
           category: 'svard-mail-server',
           maxLogSize: 10240,
           backups: 3 }

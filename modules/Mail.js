@@ -1,6 +1,8 @@
 module.exports = function(logger) {
-	var Imap = require('imap'),
-        MailParser = require("mailparser").MailParser,
+    'use strict';
+
+    var Imap = require('imap'),
+        MailParser = require('mailparser').MailParser,
         Q = require('q'),
         config = require('../config.json'),
 
@@ -14,20 +16,20 @@ module.exports = function(logger) {
         });
 
     var getHeaders = function(start, count) {
-    	var headers = [],
+        var headers = [],
             deferred = Q.defer();
 
         imap.once('ready', function() {
-    		logger.info('Connected to imap at %s', config.imap.host);
+            logger.info('Connected to imap at %s', config.imap.host);
 
-    		imap.openBox('INBOX', true, function(err, box) {
-    			var total = box.messages.total,
-                    from = total-start+1,
-                    to = from-count+1;
+            imap.openBox('INBOX', true, function(err, box) {
+                var total = box.messages.total,
+                    from = total - start + 1,
+                    to = from - count + 1;
 
                 if (count > total) {
                     to = '1';
-                    count = total-start+1;
+                    count = total - start + 1;
                 }
                 if (start > total) {
                     deferred.reject(new Error('Start point out of bounds'));
@@ -44,7 +46,7 @@ module.exports = function(logger) {
 
                     mailObj.seqno = seqno;
 
-                    msg.on('body', function(stream, info) {
+                    msg.on('body', function(stream) {
                         mailparser.on('end', function(mail) {
                             mailObj.subject = mail.subject;
                             mailObj.from = mail.from;
@@ -65,21 +67,21 @@ module.exports = function(logger) {
                 });
 
                 fetch.once('end', function() {
-                    imap.end();                   
+                    imap.end();
                 });
-    		});
-    	});
+            });
+        });
 
-    	imap.once('end', function() {
-    		logger.info('Disconnected from %s', config.imap.host);
-    	});
+        imap.once('end', function() {
+            logger.info('Disconnected from %s', config.imap.host);
+        });
 
-    	imap.connect();
+        imap.connect();
 
         return deferred.promise;
     };
 
     return {
-    	getHeaders: getHeaders
+        getHeaders: getHeaders
     };
-}
+};
