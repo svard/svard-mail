@@ -260,6 +260,14 @@ module.exports = function (grunt) {
           ]
         }]
       }
+    },
+    mochaTest: {
+      test: {
+        options: {
+          reporter: 'spec'
+        },
+        src: ['test/server/*.js']
+      }
     }
   });
 
@@ -280,7 +288,8 @@ module.exports = function (grunt) {
     'coffee',
    // 'compass',
     'connect:test',
-    'karma'
+    'karma',
+    'mochaTest'
   ]);
 
   grunt.registerTask('build', [

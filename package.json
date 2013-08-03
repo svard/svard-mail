@@ -32,7 +32,10 @@
     "grunt-open": "~0.2.0",
     "matchdep": "~0.1.2",
     "grunt-google-cdn": "~0.1.2",
-    "grunt-ngmin": "~0.0.2"
+    "grunt-ngmin": "~0.0.2",
+    "grunt-mocha-test": "~0.6.2",
+    "chai": "*",
+    "sinon": "*"
   },
   "engines": {
     "node": ">=0.8.0"
