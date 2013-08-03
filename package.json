@@ -6,7 +6,9 @@
     "express": "~3.0.0",
     "ejs": "~0.8.4",
     "imap": "~0.8.1",
-    "log4js": "~0.6.6"
+    "log4js": "~0.6.6",
+    "mailparser": "~0.3.6",
+    "q": "~0.9.6"
     },
   "devDependencies": {
     "grunt": "~0.4.1",
