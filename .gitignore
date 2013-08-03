@@ -5,3 +5,4 @@ dist
 app/components
 logs
 config.json
+test-results.xml
