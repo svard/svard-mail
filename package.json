@@ -35,7 +35,7 @@
     "grunt-ngmin": "~0.0.2",
     "grunt-mocha-test": "~0.6.2",
     "chai": "*",
-    "sinon": "*"
+    "supertest": "*"
   },
   "engines": {
     "node": ">=0.8.0"

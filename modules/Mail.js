@@ -31,7 +31,7 @@ module.exports = function(logger, Imap) {
                     to = '1';
                     count = total - start + 1;
                 }
-                if (start > total || start < 0) {
+                if (start > total || start <= 0) {
                     deferred.reject(new Error('Start point out of bounds'));
                     imap.end();
                     return;

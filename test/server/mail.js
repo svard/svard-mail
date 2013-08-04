@@ -1,8 +1,6 @@
-    var should = require('chai').should(),
-        expect = require('chai').expect,
-        sinon = require('sinon'),
-        log4js = require('log4js'),
-        Imap = require('imap');
+var should = require('chai').should(),
+    log4js = require('log4js'),
+    Imap = require('imap');
 
 describe('Mail', function(){
 
