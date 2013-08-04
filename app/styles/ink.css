@@ -352,7 +352,7 @@ table {
 }
 .ink-grid {
   width: auto;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 0 2em;
 }
@@ -668,7 +668,7 @@ body.animated *[class*="large-"] {
 @media screen and (min-width: 650px) and (max-width: 959px) {
   .ink-grid {
     width: auto;
-    max-width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
     padding: 0 1.5em;
   }
@@ -983,7 +983,7 @@ body.animated *[class*="large-"] {
 @media screen and (max-width: 649px) {
   .ink-grid {
     width: auto;
-    max-width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
     padding: 0 1em;
   }
