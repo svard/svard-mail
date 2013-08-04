@@ -1,7 +1,6 @@
 module.exports = function(logger, Imap) {
     'use strict';
 
-    // var Imap = require('imap'),
     var MailParser = require('mailparser').MailParser,
         Q = require('q'),
         config = require('../config.json'),
@@ -23,6 +22,11 @@ module.exports = function(logger, Imap) {
             logger.info('Connected to imap at %s', config.imap.host);
 
             imap.openBox('INBOX', true, function(err, box) {
+                if (err) {
+                    deferred.reject(err);
+                    return;
+                }
+
                 var total = box.messages.total,
                     from = total - start + 1,
                     to = from - count + 1;
@@ -81,7 +85,70 @@ module.exports = function(logger, Imap) {
         return deferred.promise;
     };
 
+    var getOneMessage = function(uid) {
+        var mailObj = {},
+            deferred = Q.defer();
+
+        imap.once('ready', function() {
+            logger.info('Connected to imap at %s', config.imap.host);
+
+            imap.openBox('INBOX', true, function(err) {
+                if (err) {
+                    deferred.reject(err);
+                    return;
+                }
+
+                imap.search(['ALL', ['UID', uid]], function(err, result) {
+                    if (err) {
+                        deferred.reject(err);
+                        return;
+                    }
+
+                    var fetch = imap.seq.fetch(result, {struct: true, bodies: ''});
+                    fetch.on('message', function(msg, seqno) {
+                        var mailparser = new MailParser();
+
+                        mailObj.seqno = seqno;
+
+                        msg.on('body', function(stream) {
+                            mailparser.on('end', function(mail) {
+                                mailObj.subject = mail.subject;
+                                mailObj.from = mail.from;
+                                mailObj.text = mail.text;
+                                mailObj.html = mail.html;
+                                // mailObj.attachments = mail.attachments;
+
+                                deferred.resolve(mailObj);
+                            });
+
+                            stream.pipe(mailparser);
+                        });
+
+                        msg.on('attributes', function(attrs) {
+                            mailObj.uid = attrs.uid;
+                            mailObj.flags = attrs.flags;
+                            mailObj.date = attrs.date;
+                        });
+                    });
+
+                    fetch.once('end', function() {
+                        imap.end();
+                    });
+                });
+            });
+        });
+
+        imap.once('end', function() {
+            logger.info('Disconnected from %s', config.imap.host);
+        });
+
+        imap.connect();
+
+        return deferred.promise;
+    };
+
     return {
-        getHeaders: getHeaders
+        getHeaders: getHeaders,
+        getOneMessage: getOneMessage
     };
 };

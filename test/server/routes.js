@@ -15,7 +15,7 @@ describe('routes', function(){
 
     var logger = log4js.getLogger('test'),
         Mail;
-    logger.setLevel('ERROR');
+    logger.setLevel('FATAL');
 
     beforeEach(function() {
         app = express();
@@ -39,7 +39,7 @@ describe('routes', function(){
         
         it('should respond with JSON', function(done) {
             request(app)
-                .get('/headers/1/1')
+                .get('/headers/start/1/count/1')
                 .set('Accept', 'application/json')
                 .expect('Content-Type', /json/)
                 .expect(200, done);
@@ -47,7 +47,30 @@ describe('routes', function(){
 
         it('should handle wrong parameters', function(done) {
             request(app)
-                .get('/headers/0/1')
+                .get('/headers/start/0/count/1')
+                .expect(500, done);
+        });
+    });
+
+    describe('GET /message', function() {
+
+        it('should respond with JSON', function(done) {
+            request(app)
+                .get('/message/1')
+                .set('Accept', 'application/json')
+                .expect('Content-Type', /json/)
+                .expect(200, done);
+        });
+
+        it('should reject uid zero', function(done) {
+            request(app)
+                .get('/message/0')
+                .expect(500, done);
+        });
+
+        it('should reject uid less than zero', function(done) {
+            request(app)
+                .get('/message/-1')
                 .expect(500, done);
         });
     });

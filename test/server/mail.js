@@ -14,7 +14,7 @@ describe('Mail', function(){
 
     var logger = log4js.getLogger('test'),
         Mail;
-    logger.setLevel('ERROR');
+    logger.setLevel('FATAL');
 
     beforeEach(function() {
         Mail = require('../../modules/Mail')(logger, Imap);
@@ -42,6 +42,22 @@ describe('Mail', function(){
             }, function(err) {
                 err.message.should.equal('Start point out of bounds');
                 done();
+            });
+        });
+    });
+
+    describe('#getOneMessage()', function() {
+
+        it('should fetch one message with header and body', function(done) {
+            Mail.getOneMessage(8).then(function(message) {
+                message.should.be.an('object');
+                message.should.have.property('text');
+                message.should.have.property('date');
+                message.should.have.property('subject');
+                message.should.have.property('from').with.length(1);
+                done();
+            }, function(err) {
+                done(err);
             });
         });
     });
