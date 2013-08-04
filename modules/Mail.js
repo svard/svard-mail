@@ -1,8 +1,8 @@
-module.exports = function(logger) {
+module.exports = function(logger, Imap) {
     'use strict';
 
-    var Imap = require('imap'),
-        MailParser = require('mailparser').MailParser,
+    // var Imap = require('imap'),
+    var MailParser = require('mailparser').MailParser,
         Q = require('q'),
         config = require('../config.json'),
 
@@ -31,7 +31,7 @@ module.exports = function(logger) {
                     to = '1';
                     count = total - start + 1;
                 }
-                if (start > total) {
+                if (start > total || start < 0) {
                     deferred.reject(new Error('Start point out of bounds'));
                     imap.end();
                     return;

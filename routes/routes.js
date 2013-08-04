@@ -1,7 +1,8 @@
 module.exports = function(app, logger) {
     'use strict';
 
-    var Mail = require('../modules/Mail')(logger);
+    var Imap = require('imap'),
+        Mail = require('../modules/Mail')(logger, Imap);
 
     app.get('/', function(req, resp) {
         resp.render('index.html');
