@@ -1,7 +1,6 @@
 var request = require('supertest'),
     express = require('express'),
-    log4js = require('log4js'),
-    should = require('chai').should();
+    log4js = require('log4js');
 
 describe('routes', function(){
     var routes, app;
@@ -20,7 +19,20 @@ describe('routes', function(){
 
     beforeEach(function() {
         app = express();
+        app.configure(function() {
+            app.use(express.static(__dirname + '/../../app'));
+        });
         routes = require('../../routes/routes')(app, logger);
+    });
+
+    describe('GET /', function() {
+
+        it('should respond with index.html', function(done) {
+            request(app)
+                .get('/')
+                .expect('Content-Type', /html/)
+                .expect(200, done);
+        });
     });
 
     describe('GET /headers', function() {
