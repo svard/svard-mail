@@ -37,16 +37,22 @@ module.exports = (function() {
     var condition = function () {
         var validators = _.toArray(arguments);
 
-        return function(fun, arg) {
+        return function(fun) {
+            var args = _.rest(arguments);
             var errors = mapcat(function(isValid) {
-                return isValid(arg) ? [] : [isValid.message];
+                return _.reduce(args, function(errs, arg) {
+                    if (!isValid(arg)) {
+                        errs.push(isValid.message);
+                    }
+                    return errs;
+                }, []);
             }, validators);
 
             if (!_.isEmpty(errors)) {
                 throw new Error(errors.join(', '));
             }
 
-            return fun(arg);
+            return fun.apply(null, args);
         };
     };
 
@@ -56,9 +62,9 @@ module.exports = (function() {
         };
     };
 
-    var zero = function(x) { return x === 0; };
+    var zero = function (x) { return x === 0; };
 
-    var negative = function(x) { return x < 0; };
+    var negative = function (x) { return x < 0; };
 
     return {
         validator: validator,
