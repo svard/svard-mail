@@ -4,5 +4,6 @@ dist
 .sass-cache
 app/components
 logs
+keys
 config.json
 test-results.xml
