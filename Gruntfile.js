@@ -33,6 +33,10 @@ module.exports = function (grunt) {
         files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
         tasks: ['compass']
       },
+      less: {
+        files: ['<%= yeoman.app %>/styles/{,*/}*.less'],
+        tasks: ['less']
+      },
       livereload: {
         files: [
           '<%= yeoman.app %>/{,*/}*.html',
@@ -268,6 +272,13 @@ module.exports = function (grunt) {
         },
         src: ['test/server/*.js']
       }
+    },
+    less: {
+      dist: {
+        files: {
+          '<%= yeoman.app %>/styles/main.css': ['<%= yeoman.app %>/styles/*.less']
+        }
+      }
     }
   });
 
@@ -298,6 +309,7 @@ module.exports = function (grunt) {
     'test',
     'coffee',
     // 'compass:dist',
+    'less',
     'useminPrepare',
     'concat',
     'imagemin',

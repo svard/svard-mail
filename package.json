@@ -10,7 +10,7 @@
     "mailparser": "~0.3.6",
     "q": "~0.9.6",
     "underscore": "~1.5.1"
-    },
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-copy": "~0.4.1",
@@ -36,7 +36,8 @@
     "grunt-ngmin": "~0.0.2",
     "grunt-mocha-test": "~0.6.2",
     "chai": "*",
-    "supertest": "*"
+    "supertest": "*",
+    "grunt-contrib-less": "~0.7.0"
   },
   "engines": {
     "node": ">=0.8.0"
