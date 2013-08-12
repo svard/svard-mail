@@ -1,10 +1,25 @@
 <div id="svard-mail-topbar">
-    <nav class="ink-navigation">
-        <ul class="menu horizontal shadowed black">
-            <li><a href="#">SvardMail</a></li>
+    <nav class="ink-navigation ink-grid hide-small">
+        <ul class="menu horizontal black">
+            <li><a href="#"><i class="icon-home"></i></a></li>
             <li><a href="#">Write</a></li>
-            <li><a href="#">Options</a></li>
+            <li><a href="#">Contacts</a></li>
             <li style="float: right"><a href="#">Logout</a></li>
+        </ul>
+    </nav>
+    <nav class="ink-navigation ink-grid hide-all show-small">
+        <ul class="menu vertical black">
+            <li>
+                <button class="toggle" data-target="#topbar_menu">
+                    <span class="icon-reorder"></span>
+                </button>
+            </li>
+        </ul>
+        <ul class="menu vertical black hide-all" id="topbar_menu">
+            <li><a href="#"><i class="icon-home"></i></a></li>
+            <li><a href="#">Write</a></li>
+            <li><a href="#">Contacts</a></li>
+            <li><a href="#">Logout</a></li>
         </ul>
     </nav>
 </div>
@@ -18,10 +33,10 @@
     </div>
 
     <div class="column-group gutters">
-        <div class="svard-mail-sidebar large-10 medium-20 small-100">
+        <div class="svard-mail-sidebar large-20 medium-20 small-100">
             <nav class="ink-navigation">
                 <ul class="menu vertical shadowed blue">
-                    <li><a href="#">Inbox</a></li>
+                    <li class="active"><a href="#">Inbox</a></li>
                     <li><a href="#">Sent</a></li>
                     <li><a href="#">Trash</a></li>
                 </ul>
