@@ -1,14 +1,21 @@
-.topbar-background {
+.nav-background {
     background: -moz-linear-gradient(top, #1a1a1a 0%, #0d0d0d 150%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1a1a1a), color-stop(150%, #0d0d0d));
     background: -webkit-linear-gradient(top, #1a1a1a 0%, #0d0d0d 150%);
     background: linear-gradient(to bottom, #1a1a1a 0%, #0d0d0d 150%);
 }
 
+.unstyled-button (@color: #bbbbbb) {
+    background: none;
+    border: none;
+    color: @color;
+    outline: none;
+}
+
 #svard-mail {
 
     &-topbar {
-        .topbar-background;
+        .nav-background;
         position: fixed;
         top: 0;
         left: 0;
@@ -16,23 +23,56 @@
         z-index: 100;
 
         .ink-navigation ul li button {
-            background: none;
-            border: none;
-            color: #bbbbbb;
-            outline: none;
+            .unstyled-button;
         }
     }
 
     &-content {
         margin-top: 2.9em;
     }
+
+    &-footer {
+        .nav-background;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+    }
 }
 
 .svard-mail {
 
-    &-header {
-        h1 {
-            text-align: center;
+    &-unread {
+        font-weight: bold;
+        background-color: #eeeeee;
+    }
+
+    &-footer-text {
+        padding-top: 12px;
+        padding-bottom: 13px;
+
+        span {
+            color: #ffffff;
+            font-style: italic;
+            font-size: 10px;
         }
+    }
+
+    &-table table {
+        margin-top: 0;
+
+        thead tr th button {
+            .unstyled-button(#000000);
+
+            &:active {
+                -webkit-transform: translate(1px,1px);
+                -moz-transform: translate(1px,1px);
+            }
+        }
+    }
+
+    &-search form fieldset {
+        margin-bottom: 0;
     }
 }

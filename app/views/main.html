@@ -1,32 +1,7 @@
-<div id="svard-mail-topbar">
-    <nav class="ink-navigation ink-grid hide-small">
-        <ul class="menu horizontal black">
-            <li><a href="#"><i class="icon-home"></i></a></li>
-            <li><a href="#">Write</a></li>
-            <li><a href="#">Contacts</a></li>
-            <li style="float: right"><a href="#">Logout</a></li>
-        </ul>
-    </nav>
-    <nav class="ink-navigation ink-grid hide-all show-small">
-        <ul class="menu vertical black">
-            <li>
-                <button class="toggle" data-target="#topbar_menu">
-                    <span class="icon-reorder"></span>
-                </button>
-            </li>
-        </ul>
-        <ul class="menu vertical black hide-all" id="topbar_menu">
-            <li><a href="#"><i class="icon-home"></i></a></li>
-            <li><a href="#">Write</a></li>
-            <li><a href="#">Contacts</a></li>
-            <li><a href="#">Logout</a></li>
-        </ul>
-    </nav>
-</div>
 <div id="svard-mail-content" class="ink-grid">
-    <div class="column-group">
-        <div class="large-100 medium-100 small-100">
-            <header class="svard-mail-header large-100 medium-100 small-100">
+    <div class="column-group gutters">
+        <div class="large-100 medium-100 small-100 content-center">
+            <header class="large-100 medium-100 small-100">
                 <h1>SvardMail</h1>
             </header>
         </div>
@@ -42,10 +17,50 @@
                 </ul>
             </nav>
         </div>
-        <div class="large-90 medium-80 small-100">
-            <div class="column-group">
-
+        <div class="svard-mail-table large-80 medium-80 small-100">
+            <div class="column-group gutters">
+                <div class="svard-mail-summary large-70 medium-60 small-100">
+                    <p>You have<span class="ink-badge red">2</span> unread mails out of<span class="ink-badge blue">10</span></p>
+                </div>
+                <div class="svard-mail-search large-30 medium-40 small-100">
+                    <form class="ink-form">
+                        <fieldset>
+                            <div class="control-group">
+                                <div class="control append-button">
+                                    <span><input type="text" placeholder="Search mail"></span>
+                                    <button class="ink-button"><i class="icon-search"></i></button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
             </div>
+            <table class="ink-table">
+                <thead>
+                    <tr>
+                        <th class="content-left">
+                            <button title="Move selected to trash"><span class="icon-trash"></span></button>
+                        </th>
+                        <th class="content-left">From <i class="icon-caret-down"></i></th>
+                        <th class="content-left">Subject <i class="icon-caret-down"></i></th>
+                        <th class="content-left">Date <i class="icon-caret-down"></i></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="svard-mail-unread">
+                        <td><input type="checkbox" /></td>
+                        <td>Annie Huang</td>
+                        <td>Happy Anniversary</td>
+                        <td>2013-08-07</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" /></td>
+                        <td>Kristofer Svärd</td>
+                        <td>Testing my mail</td>
+                        <td>2013-08-05</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
