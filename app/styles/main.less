@@ -1,3 +1,25 @@
+@media (max-width: 649px) {
+    body {
+        font-size: 60%;
+    }
+
+    .ink-form input[type="text"] {
+        font-size: 100%;
+        padding: 4px 4px;
+    }
+}
+
+@media (min-width: 650px) and (max-width: 959px) {
+    body {
+        font-size: 80%;
+    }
+
+    .ink-form input[type="text"] {
+        font-size: 100%;
+        padding: 6px 6px;
+    }
+}
+
 .nav-background {
     background: -moz-linear-gradient(top, #1a1a1a 0%, #0d0d0d 150%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1a1a1a), color-stop(150%, #0d0d0d));
@@ -27,10 +49,6 @@
         }
     }
 
-    &-content {
-        margin-top: 2.9em;
-    }
-
     &-footer {
         .nav-background;
         position: fixed;
@@ -42,6 +60,10 @@
 }
 
 .svard-mail {
+
+    &-content {
+        margin-top: 2.9em;
+    }
 
     &-unread {
         font-weight: bold;
@@ -68,6 +90,7 @@
             &:active {
                 -webkit-transform: translate(1px,1px);
                 -moz-transform: translate(1px,1px);
+                transform: translate(1px,1px);
             }
         }
     }

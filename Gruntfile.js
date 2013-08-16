@@ -259,8 +259,11 @@ module.exports = function (grunt) {
             '*.{ico,txt}',
             '.htaccess',
             'components/**/*',
-            'images/{,*/}*.{gif,webp}',
-            'styles/fonts/*'
+            'lib/*',
+            'img/*',
+            'font/*'
+            // 'images/{,*/}*.{gif,webp}',
+            // 'styles/fonts/*'
           ]
         }]
       }
@@ -276,7 +279,7 @@ module.exports = function (grunt) {
     less: {
       dist: {
         files: {
-          '<%= yeoman.app %>/styles/main.css': ['<%= yeoman.app %>/styles/*.less']
+          '<%= yeoman.app %>/styles/svardmail.css': ['<%= yeoman.app %>/styles/*.less']
         }
       }
     }

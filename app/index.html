@@ -12,7 +12,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css styles/main.css -->
     <!-- <link rel="stylesheet" href="styles/ink.css"> -->
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/svardmail.css">
     <!-- endbuild -->
     <script src="lib/ink.min.js"></script>
     <script src="lib/ink.toggle.js"></script>
@@ -33,8 +33,8 @@
       <nav class="ink-navigation ink-grid hide-small">
         <ul class="menu horizontal black">
           <li><a href="#"><i class="icon-home"></i></a></li>
-          <li><a href="#"><i class="icon-pencil"></i> Write</a></li>
-          <li><a href="#"><i class="icon-group"></i> Contacts</a></li>
+          <li><a href="#/compose"><i class="icon-pencil"></i> Write</a></li>
+          <li><a href="#/contacts"><i class="icon-group"></i> Contacts</a></li>
           <li style="float: right"><a href="#"><i class="icon-signout"></i> Logout</a></li>
         </ul>
       </nav>
@@ -48,14 +48,14 @@
         </ul>
         <ul class="menu vertical black hide-all" id="topbar_menu">
           <li><a href="#"><i class="icon-home"></i></a></li>
-          <li><a href="#"><i class="icon-pencil"></i> Write</a></li>
-          <li><a href="#"><i class="icon-group"></i> Contacts</a></li>
+          <li><a href="#/compose"><i class="icon-pencil"></i> Write</a></li>
+          <li><a href="#/contacts"><i class="icon-group"></i> Contacts</a></li>
           <li><a href="#"><i class="icon-signout"></i> Logout</a></li>
         </ul>
       </nav>
     </header>
     <div ng-view></div>
-    <footer id="svard-mail-footer">
+    <footer id="svard-mail-footer" class="hide-small">
       <div class="svard-mail-footer-text ink-grid content-right">
         <span>Kristofer Svärd 2013</span>
       </div>
@@ -67,6 +67,8 @@
     <!-- build:js scripts/scripts.js -->
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/compose.js"></script>
+    <script src="scripts/controllers/contacts.js"></script>
     <!-- endbuild -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
