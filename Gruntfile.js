@@ -279,7 +279,8 @@ module.exports = function (grunt) {
     less: {
       dist: {
         files: {
-          '<%= yeoman.app %>/styles/svardmail.css': ['<%= yeoman.app %>/styles/*.less']
+          '<%= yeoman.app %>/styles/ink.css': ['<%= yeoman.app %>/styles/ink.less'],
+          '<%= yeoman.app %>/styles/svardmail.css': ['<%= yeoman.app %>/styles/views/*.less']
         }
       }
     }
