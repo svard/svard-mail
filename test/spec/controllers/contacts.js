@@ -3,7 +3,7 @@
 describe('Controller: ContactsCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('SvardMailAppApp'));
+  beforeEach(module('svardMailApp'));
 
   var ContactsCtrl,
     scope;
