@@ -27,7 +27,8 @@ describe('Mail', function(){
     describe('#getHeaders()', function(){
 
         it('should receive an array of headers', function(done){
-            Mail.getHeaders(1, 3).then(function(headers) {
+            Mail.getHeaders(1, 3).then(function(response) {
+                var headers = response.headers;
                 headers.should.be.an('array');
                 headers.should.have.length(3);
                 done();

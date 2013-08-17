@@ -6,24 +6,22 @@ describe('Controller: MainCtrl', function () {
     beforeEach(module('svardMailApp'));
 
     var MainCtrl,
-        scope,
-        mockBackend;
+        scope;
 
     // Initialize the controller and a mock scope
-    beforeEach(inject(function ($controller, $rootScope, _$httpBackend_) {
+    beforeEach(inject(function ($controller, $rootScope) {
         scope = $rootScope.$new();
-        mockBackend = _$httpBackend_;
         MainCtrl = $controller('MainCtrl', {
-            $scope: scope
+            $scope: scope,
+            headers: {
+                totalMsg: 10,
+                unreadMsg: 2,
+                headers: []
+            }
         });
     }));
 
-    it('should attach a list of awesomeThings to the scope', function () {
-        expect(scope.awesomeThings.length).toBe(3);
-    });
-
     it('should fetch number of total and unread mail', function () {
-        expect(scope.currentMailCount.total).toBe(0);
-        expect(scope.currentMailCount.unread).toBe(0);
+        expect(MainCtrl).toBeDefined();
     });
 });

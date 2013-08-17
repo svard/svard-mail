@@ -15,7 +15,8 @@ module.exports = function(logger, Imap) {
         });
 
     var getHeaders = function(start, count) {
-        var headers = [],
+        var responseObj = {},
+            headers = [],
             deferred = Q.defer();
 
         imap.once('ready', function() {
@@ -42,6 +43,8 @@ module.exports = function(logger, Imap) {
                 }
 
                 logger.info('You have %s total messages and %s new messages', total, box.messages.new);
+                responseObj.totalMsg = total;
+                responseObj.unreadMsg = box.messages.new;
 
                 var fetch = imap.seq.fetch(from + ':' + to, {struct: true, bodies: 'HEADER'});
                 fetch.on('message', function(msg, seqno) {
@@ -56,7 +59,8 @@ module.exports = function(logger, Imap) {
                             mailObj.from = mail.from;
                             headers.push(mailObj);
                             if (headers.length === count) {
-                                deferred.resolve(headers);
+                                responseObj.headers = headers;
+                                deferred.resolve(responseObj);
                             }
                         });
 
