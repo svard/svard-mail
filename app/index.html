@@ -14,9 +14,7 @@
     <link rel="stylesheet" href="styles/ink.css">
     <link rel="stylesheet" href="styles/svardmail.css">
     <!-- endbuild -->
-    <script src="lib/ink.min.js"></script>
-    <script src="lib/ink.toggle.js"></script>
-    <script src="lib/autoload.js"></script>
+
   </head>
   <body ng-app="svardMailApp">
     <!--[if lt IE 7]>
@@ -38,15 +36,15 @@
           <li style="float: right"><a href="#"><i class="icon-signout"></i> Logout</a></li>
         </ul>
       </nav>
-      <nav class="ink-navigation ink-grid hide-all show-small">
+      <nav class="ink-navigation ink-grid hide-all show-small" nav-toggle>
         <ul class="menu vertical black">
           <li>
-            <button class="toggle" data-target="#topbar_menu">
+            <button>
               <span class="icon-reorder"></span>
             </button>
           </li>
         </ul>
-        <ul class="menu vertical black hide-all" id="topbar_menu">
+        <ul class="menu vertical black hide-all">
           <li><a href="#"><i class="icon-home"></i></a></li>
           <li><a href="#/compose"><i class="icon-pencil"></i> Write</a></li>
           <li><a href="#/contacts"><i class="icon-group"></i> Contacts</a></li>
@@ -70,14 +68,15 @@
     <script src="scripts/controllers/compose.js"></script>
     <script src="scripts/controllers/contacts.js"></script>
     <script src="scripts/service/services.js"></script>
+    <script src="scripts/directive/navDirectives.js"></script>
     <!-- endbuild -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-    <script>
+    <!-- <script>
       var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
       (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
       g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
       s.parentNode.insertBefore(g,s)}(document,'script'));
-    </script>
+    </script> -->
   </body>
 </html>
