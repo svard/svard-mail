@@ -11,16 +11,16 @@
         <div class="svard-mail-sidebar large-20 medium-20 small-100">
             <nav class="ink-navigation">
                 <ul class="menu vertical shadowed blue">
-                    <li ng-class="{active: selectedBox.inbox}"><a href="">Inbox</a></li>
-                    <li ng-class="{active: selectedBox.sent}"><a href="">Sent</a></li>
-                    <li ng-class="{active: selectedBox.trash}"><a href="">Trash</a></li>
+                    <li><a href="">INBOX</a></li>
+                    <li><a href="">Sent</a></li>
+                    <li><a href="">Trash</a></li>
                 </ul>
             </nav>
         </div>
         <div class="svard-mail-table large-80 medium-80 small-100">
             <div class="column-group gutters">
                 <div class="svard-mail-summary large-70 medium-60 small-60">
-                    <p>You have<span class="ink-badge red">{{mailBox.unreadMsg}}</span> unread mails out of<span class="ink-badge blue">{{mailBox.totalMsg}}</span></p>
+                    <p>You have<span class="ink-badge red">{{box.unreadMsg}}</span> unread mails out of<span class="ink-badge blue">{{box.totalMsg}}</span></p>
                 </div>
                 <div class="svard-mail-search large-30 medium-40 small-40">
                     <form class="ink-form">
@@ -44,6 +44,7 @@
                         <th class="content-left">From <i class="icon-caret-down"></i></th>
                         <th class="content-left">Subject <i class="icon-caret-down"></i></th>
                         <th class="content-left">Date <i class="icon-caret-down"></i></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -52,12 +53,14 @@
                         <td>Annie Huang</td>
                         <td>Happy Anniversary</td>
                         <td>2013-08-07</td>
+                        <td><i class="icon-chevron-down"></td>
                     </tr>
                     <tr>
                         <td><input type="checkbox" /></td>
                         <td>Kristofer Svärd</td>
                         <td>Testing my mail</td>
                         <td>2013-08-05</td>
+                        <td><i class="icon-chevron-down"></td>
                     </tr>
                 </tbody>
             </table>

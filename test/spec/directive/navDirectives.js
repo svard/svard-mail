@@ -1,6 +1,8 @@
 'use strict';
 
-describe('Directive: navDirectives', function () {
+describe('Directive: navToggle', function () {
+    var element,
+        scope;
 
     // load the directive's module
     beforeEach(module('svardMailApp'));
@@ -15,9 +17,6 @@ describe('Directive: navDirectives', function () {
             }
         });
     });
-
-    var element,
-        scope;
 
     beforeEach(inject(function ($rootScope, $compile) {
         scope = $rootScope.$new();
@@ -41,7 +40,7 @@ describe('Directive: navDirectives', function () {
         element = $compile(element)(scope);
     }));
 
-    it('should toggle menu visibility on click', inject(function ($compile) {
+    it('should toggle menu visibility on button click', inject(function ($compile) {
         var hiddenUl = angular.element(element.children().eq(1));
 
         expect(hiddenUl).toHaveClass('hide-all');

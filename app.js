@@ -1,16 +1,16 @@
 'use strict';
 
 var express = require('express'),
-    https = require('https'),
-    fs = require('fs'),
+    https = require('http'),
+    // fs = require('fs'),
     log4js = require('log4js');
 
-var privateKey = fs.readFileSync('./keys/site.key').toString(),
-    certificate = fs.readFileSync('./keys/final.crt').toString(),
-    options = {
-        key: privateKey,
-        cert: certificate
-    };
+// var privateKey = fs.readFileSync('./keys/site.key').toString(),
+//     certificate = fs.readFileSync('./keys/final.crt').toString(),
+    // options = {
+    //     key: privateKey,
+    //     cert: certificate
+    // };
 
 var app = express();
 // app.use(express.logger());
@@ -46,6 +46,7 @@ app.configure(function(){
 require('./routes/routes')(app, logger);
 
 var port = process.env.PORT || 5000;
-https.createServer(options, app).listen(port, function() {
+// https.createServer(options, app).listen(port, function() {
+https.createServer(app).listen(port, function() {
     logger.info('Listening on ' + port);
 });

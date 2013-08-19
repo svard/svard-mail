@@ -13,15 +13,15 @@ describe('Controller: MainCtrl', function () {
         scope = $rootScope.$new();
         MainCtrl = $controller('MainCtrl', {
             $scope: scope,
-            headers: {
-                totalMsg: 10,
-                unreadMsg: 2,
-                headers: []
-            }
+            // headers: {
+            //     totalMsg: 10,
+            //     unreadMsg: 2,
+            //     headers: []
+            // }
         });
     }));
 
-    it('should fetch number of total and unread mail', function () {
-        expect(MainCtrl).toBeDefined();
-    });
+    // it('should fetch number of total and unread mail', function () {
+    //     expect(MainCtrl).toBeDefined();
+    // });
 });

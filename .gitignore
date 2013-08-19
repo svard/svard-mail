@@ -6,5 +6,5 @@ app/components
 logs
 keys
 app/styles/*.css
-config.json
+*.json
 test-results.xml
