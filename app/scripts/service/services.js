@@ -2,7 +2,8 @@
 
 angular.module('svardMailApp')
     .factory('Headers', ['$resource', function($resource) {
-        return $resource('/headers/start/:start/count/:count', {start: 1, count: 10});
+        // return $resource('/headers/start/:start/count/:count', {start: 1, count: 10});
+        return $resource('../../mockmail.json', {start: 1, count: 10});
     }])
 
     .factory('HeaderLoader', ['Headers', '$q', function(Headers, $q) {

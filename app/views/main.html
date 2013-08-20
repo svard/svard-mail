@@ -9,12 +9,13 @@
 
     <div class="column-group gutters">
         <div class="svard-mail-sidebar large-20 medium-20 small-100">
-            <nav class="ink-navigation">
-                <ul class="menu vertical shadowed blue">
+            <nav class="ink-navigation" nav-mail-boxes box-names="box.mailBoxes">
+<!--                <ul class="menu vertical shadowed blue" nav-mail-boxes>
+                    <li ng-repeat="mailBox in box.mailBoxes"><a href="">{{mailBox}}</a></li>
                     <li><a href="">INBOX</a></li>
                     <li><a href="">Sent</a></li>
                     <li><a href="">Trash</a></li>
-                </ul>
+                 </ul>-->
             </nav>
         </div>
         <div class="svard-mail-table large-80 medium-80 small-100">
@@ -54,6 +55,9 @@
                         <td>Happy Anniversary</td>
                         <td>2013-08-07</td>
                         <td><i class="icon-chevron-down"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5"><pre>I'm the content of a message&#xATwo lines?</pre></td>
                     </tr>
                     <tr>
                         <td><input type="checkbox" /></td>

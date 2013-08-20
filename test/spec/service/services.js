@@ -20,7 +20,8 @@ describe('Service: services', function () {
     }));
 
     it('should load headers and number of total and unread messages', function () {
-        mockBackend.expectGET('/headers/start/1/count/3').respond({totalMsg: 3, unreadMsg: 0, headers: [
+        // mockBackend.expectGET('/headers/start/1/count/3').respond({totalMsg: 3, unreadMsg: 0, headers: [
+        mockBackend.expectGET('../../mockmail.json?count=3&start=1').respond({totalMsg: 3, unreadMsg: 0, headers: [
             {
                 "seqno": 1,
                 "uid": 1,
