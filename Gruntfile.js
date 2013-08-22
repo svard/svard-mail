@@ -304,7 +304,7 @@ module.exports = function (grunt) {
    // 'compass',
     'connect:test',
     'karma',
-    // 'mochaTest'
+    'mochaTest'
   ]);
 
   grunt.registerTask('build', [
