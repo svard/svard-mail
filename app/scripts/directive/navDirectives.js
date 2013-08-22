@@ -29,6 +29,7 @@ angular.module('svardMailApp')
 
                 list.bind('click', function(e) {
                     scope.$apply(function() {
+                        console.log(e.target.text);
                         scope.active = e.target.text;
                     });
                 });
