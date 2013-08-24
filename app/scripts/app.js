@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('svardMailApp', ['ngResource'])
+angular.module('svardMailApp', ['ngResource', 'ngRoute'])
     .config(function ($routeProvider) {
         $routeProvider
             .when('/', {
