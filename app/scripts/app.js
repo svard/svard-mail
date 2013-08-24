@@ -7,9 +7,9 @@ angular.module('svardMailApp', ['ngResource'])
                 templateUrl: 'views/main.html',
                 controller: 'MainCtrl',
                 resolve: {
-                    headers: function(HeaderLoader) {
+                    headers: ['HeaderLoader', function(HeaderLoader) {
                         return new HeaderLoader(1, 3);
-                    }
+                    }]
                 }
             })
             .when('/compose', {

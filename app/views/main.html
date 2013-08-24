@@ -10,12 +10,6 @@
     <div class="column-group gutters">
         <div class="svard-mail-sidebar large-20 medium-20 small-100">
             <nav class="ink-navigation" nav-mail-boxes box-names="box.mailBoxes">
-<!--                <ul class="menu vertical shadowed blue" nav-mail-boxes>
-                    <li ng-repeat="mailBox in box.mailBoxes"><a href="">{{mailBox}}</a></li>
-                    <li><a href="">INBOX</a></li>
-                    <li><a href="">Sent</a></li>
-                    <li><a href="">Trash</a></li>
-                 </ul>-->
             </nav>
         </div>
         <div class="svard-mail-table large-80 medium-80 small-100">
@@ -25,7 +19,7 @@
                 </div>
                 <div class="svard-mail-search large-30 medium-40 small-40">
                     <form class="ink-form">
-                        <fieldset>
+                        <fieldset disabled>
                             <div class="control-group">
                                 <div class="control append-button">
                                     <span><input type="text" placeholder="Search mail"></span>
@@ -36,8 +30,8 @@
                     </form>
                 </div>
             </div>
-            <table class="ink-table">
-                <thead>
+            <table class="ink-table" mail-table headers="box.headers">
+<!--                 <thead>
                     <tr>
                         <th class="content-left">
                             <button title="Move selected to trash"><span class="icon-trash"></span></button>
@@ -67,7 +61,7 @@
                         <td><i class="icon-chevron-down"></td>
                     </tr>
                 </tbody>
-            </table>
+ -->            </table>
         </div>
     </div>
 </div>
