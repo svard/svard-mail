@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Directives', function () {
+describe('NavDirectives', function () {
 
     var element,
         scope;

@@ -10,11 +10,34 @@ files = [
   'app/components/angular/angular.js',
   'app/components/angular-resource/angular-resource.js',
   'app/components/angular-mocks/angular-mocks.js',
+  'app/components/angular-route/angular-route.js',
+  'app/components/underscore/underscore.js',
   'app/scripts/*.js',
   'app/scripts/**/*.js',
+  'app/views/templates/*.html',
   'test/mock/**/*.js',
-  'test/spec/**/*.js'
+  'test/spec/**/*.js',
 ];
+
+preprocessors = {
+  'app/views/templates/*.html': 'html2js'
+};
+
+ngHtml2JsPreprocessor = {
+  // strip this from the file path
+  stripPrefix: 'app/',
+  // prepend this to the
+  // prependPrefix: 'app/',
+
+  // or define a custom transform function
+  // cacheIdFromPath: function(filepath) {
+  //   return cacheId;
+  // },
+
+  // setting this option will create only a single module that contains templates
+  // from all the files, so you can load them all with module('foo')
+  // moduleName: 'foo'
+}
 
 // list of files to exclude
 exclude = [];

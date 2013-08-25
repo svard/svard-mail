@@ -7,50 +7,45 @@ angular.module('svardMailApp')
             scope: {
                 headers: '=headers'
             },
-            controller: 'TableCtrl',
-            // link: function postLink($scope, element) {
-            // }
-        };
-    })
+            link: function postLink($scope, element) {
+                $scope.sortingOrder = 'date';
+                $scope.reverse = true;
 
-    .directive('mailTableRow', function () {
-        return {
-            templateUrl: 'views/templates/mailTableRow.html',
-            require: '^mailTable',
-            link: function postLink($scope) {
-                var nameSort = function(mail) {
-                    return mail.from[0].name;
-                };
+                $scope.sortBy = function(newSortOrder) {
+                    if ($scope.sortingOrder === newSortOrder) {
+                        $scope.reverse = !$scope.reverse;
+                    }
+                    $scope.sortingOrder = newSortOrder;
 
-                var subjectSort = function(mail) {
-                    return mail.subject;
-                };
+                    var columns = angular.element(element.children().eq(0)).find('i');
+                    angular.forEach(columns, function(column) {
+                        angular.element(column).removeClass('icon-caret-up icon-caret-down').addClass('icon-sort');
+                    });
 
-                var dateSort = function(mail) {
-                    return -new Date(mail.date).getTime();
-                };
-
-                $scope.sortFunc = dateSort;
-
-                $scope.$on('sortFuncChanged', function(event, target) {
-                    switch(target) {
-                        case 'name':
-                            $scope.sortFunc = nameSort;
+                    switch($scope.sortingOrder) {
+                        case 'from[0].name':
+                            if ($scope.reverse) {
+                                angular.element(columns[0]).removeClass('icon-sort').addClass('icon-caret-up');
+                            } else {
+                                angular.element(columns[0]).removeClass('icon-sort').addClass('icon-caret-down');
+                            }
                             break;
                         case 'subject':
-                            $scope.sortFunc = subjectSort;
+                            if ($scope.reverse) {
+                                angular.element(columns[1]).removeClass('icon-sort').addClass('icon-caret-up');
+                            } else {
+                                angular.element(columns[1]).removeClass('icon-sort').addClass('icon-caret-down');
+                            }
                             break;
                         case 'date':
-                            $scope.sortFunc = dateSort;
+                            if ($scope.reverse) {
+                                angular.element(columns[2]).removeClass('icon-sort').addClass('icon-caret-up');
+                            } else {
+                                angular.element(columns[2]).removeClass('icon-sort').addClass('icon-caret-down');
+                            }
                             break;
-                    }
-                });
-
-                $scope.isUnseen = function(header) {
-                    if (_.contains(header.flags, '\\Unseen')) {
-                        return 'svard-mail-unseen';
                     }
                 };
             }
         };
-  });
+    });
