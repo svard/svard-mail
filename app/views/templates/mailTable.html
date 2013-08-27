@@ -3,18 +3,21 @@
         <th class="content-left">
             <button title="Move selected to trash"><span class="icon-trash"></span></button>
         </th>
-        <th class="content-left">From <i class="icon-sort" ng-click="sortBy('from[0].name')"></i></th>
-        <th class="content-left">Subject <i class="icon-sort" ng-click="sortBy('subject')"></i></th>
-        <th class="content-left">Date <i class="icon-caret-up" ng-click="sortBy('date')"></i></th>
+        <th class="content-left from">From <i class="icon-sort" ng-click="sortBy('from[0].name')"></i></th>
+        <th class="content-left subject">Subject <i class="icon-sort" ng-click="sortBy('subject')"></i></th>
+        <th class="content-left date">Date <i class="icon-caret-up" ng-click="sortBy('date')"></i></th>
         <th></th>
     </tr>
 </thead>
 <tbody>
-    <tr ng-repeat="header in headers | orderBy:sortingOrder:reverse">
+    <tr ng-repeat-start="header in headers | orderBy:sortingOrder:reverse">
         <td><input type="checkbox" /></td>
         <td>{{header.from[0].name}}</td>
         <td>{{header.subject}}</td>
         <td>{{header.date | date:'MMM d, HH:mm:ss'}}</td>
         <td><i class="icon-chevron-down"></td>
+    </tr>
+    <tr ng-repeat-end ng-show="false">
+        <td colspan="5"><pre>{{header.text}}</pre></td>
     </tr>
 </tbody>

@@ -12,38 +12,21 @@ angular.module('svardMailApp')
                 $scope.reverse = true;
 
                 $scope.sortBy = function(newSortOrder) {
+                    var thClass = newSortOrder === 'from[0].name' ? 'from' : newSortOrder;
+
                     if ($scope.sortingOrder === newSortOrder) {
                         $scope.reverse = !$scope.reverse;
                     }
                     $scope.sortingOrder = newSortOrder;
 
-                    var columns = angular.element(element.children().eq(0)).find('i');
-                    angular.forEach(columns, function(column) {
-                        angular.element(column).removeClass('icon-caret-up icon-caret-down').addClass('icon-sort');
+                    element.find('th i').each(function() {
+                        $(this).removeClass().addClass('icon-sort');
                     });
 
-                    switch($scope.sortingOrder) {
-                        case 'from[0].name':
-                            if ($scope.reverse) {
-                                angular.element(columns[0]).removeClass('icon-sort').addClass('icon-caret-up');
-                            } else {
-                                angular.element(columns[0]).removeClass('icon-sort').addClass('icon-caret-down');
-                            }
-                            break;
-                        case 'subject':
-                            if ($scope.reverse) {
-                                angular.element(columns[1]).removeClass('icon-sort').addClass('icon-caret-up');
-                            } else {
-                                angular.element(columns[1]).removeClass('icon-sort').addClass('icon-caret-down');
-                            }
-                            break;
-                        case 'date':
-                            if ($scope.reverse) {
-                                angular.element(columns[2]).removeClass('icon-sort').addClass('icon-caret-up');
-                            } else {
-                                angular.element(columns[2]).removeClass('icon-sort').addClass('icon-caret-down');
-                            }
-                            break;
+                    if ($scope.reverse) {
+                        element.find('th.' + thClass + ' i').removeClass('icon-sort').addClass('icon-caret-up');
+                    } else {
+                        element.find('th.' + thClass + ' i').removeClass('icon-sort').addClass('icon-caret-down');
                     }
                 };
             }
