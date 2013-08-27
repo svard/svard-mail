@@ -44,6 +44,12 @@
     outline: none;
 }
 
+.icon-click (@transX: 1px, @transY: 1px) {
+    -webkit-transform: translate(@transX,@transY);
+    -moz-transform: translate(@transX,@transY);
+    transform: translate(@transX,@transY);
+}
+
 #svard-mail {
 
     &-topbar {
@@ -99,9 +105,19 @@
             .unstyled-button(#000000);
 
             &:active {
-                -webkit-transform: translate(1px,1px);
-                -moz-transform: translate(1px,1px);
-                transform: translate(1px,1px);
+                .icon-click;
+            }
+        }
+
+        tbody tr td button {
+            .unstyled-button(#000000);
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            &:active {
+                .icon-click;
             }
         }
     }
@@ -112,5 +128,9 @@
 
     &-summary {
         margin-top: 4px;
+    }
+
+    &-hide {
+        display: none;
     }
 }

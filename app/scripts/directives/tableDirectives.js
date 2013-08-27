@@ -29,6 +29,22 @@ angular.module('svardMailApp')
                         element.find('th.' + thClass + ' i').removeClass('icon-sort').addClass('icon-caret-down');
                     }
                 };
+
+                $scope.toggleBody = function(header) {
+                    var mailBodyEl = element.find('tbody tr.svard-mail-uid-' + header.uid);
+                    mailBodyEl.toggleClass('svard-mail-hide');
+                    if (mailBodyEl.prev().find('td i').hasClass('icon-chevron-down')) {
+                        mailBodyEl.prev().find('td i').removeClass('icon-chevron-down').addClass('icon-chevron-up');
+                    } else {
+                        mailBodyEl.prev().find('td i').removeClass('icon-chevron-up').addClass('icon-chevron-down');
+                    }
+                };
+
+                $scope.isUnseen = function(header) {
+                    if (_.contains(header.flags, '\\Unseen')) {
+                        return 'svard-mail-unseen';
+                    }
+                };
             }
         };
     });
