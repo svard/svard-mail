@@ -15,7 +15,7 @@
         <td>{{header.from[0].name}}</td>
         <td>{{header.subject}}</td>
         <td>{{header.date | date:'MMM d, HH:mm:ss'}}</td>
-        <td><button><i class="icon-chevron-down" ng-click="toggleBody(header)"></i></button></td>
+        <td><button ng-click="toggleBody(header)"><i class="icon-chevron-down"></i></button></td>
     </tr>
     <tr ng-repeat-end class="svard-mail-uid-{{header.uid}} svard-mail-hide">
         <td colspan="5"><pre>{{header.text}}</pre></td>
