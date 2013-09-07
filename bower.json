@@ -1,5 +1,5 @@
 {
-  "name": "SvardMailApp",
+  "name": "svardMail",
   "version": "0.0.3",
   "dependencies": {
     "angular": "~1.2.0-rc.1",

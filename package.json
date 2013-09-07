@@ -1,5 +1,5 @@
 {
-  "name": "SvardMailApp",
+  "name": "svardMail",
   "version": "0.0.1",
   "author": "Kristofer Svärd <kristofer@svard.net>",
   "dependencies": {

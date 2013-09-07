@@ -7,7 +7,7 @@ angular.module('svardMailApp', ['ngResource', 'ngRoute'])
                 templateUrl: 'views/main.html',
                 controller: 'MainCtrl',
                 resolve: {
-                    headers: ['HeaderLoader', function(HeaderLoader) {
+                    headers: ['HeaderLoader', function (HeaderLoader) {
                         return new HeaderLoader(1, 3);
                     }]
                 }
@@ -15,6 +15,15 @@ angular.module('svardMailApp', ['ngResource', 'ngRoute'])
             .when('/compose', {
                 templateUrl: 'views/compose.html',
                 controller: 'ComposeCtrl'
+            })
+            .when('/compose/:uid', {
+                templateUrl: 'views/compose_reply.html',
+                controller: 'ComposeReplyCtrl',
+                resolve: {
+                    body: ['BodyLoader', function (BodyLoader) {
+                        return new BodyLoader();
+                    }]
+                }
             })
             .when('/contacts', {
                 templateUrl: 'views/contacts.html',

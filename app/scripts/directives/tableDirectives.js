@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('svardMailApp')
-    .directive('mailTable', function () {
+    .directive('mailTable', ['$location', function ($location) {
         return {
             templateUrl: 'views/templates/mailTable.html',
             scope: {
@@ -45,6 +45,10 @@ angular.module('svardMailApp')
                         return 'svard-mail-unseen';
                     }
                 };
+
+                $scope.readMail = function(header) {
+                    $location.path('/compose/' + header.uid);
+                };
             }
         };
-    });
+    }]);
