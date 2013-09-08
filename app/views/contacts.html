@@ -1,3 +1,21 @@
 <div class="svard-mail-content ink-grid">
-    <p>This is the contacts view.</p>
+    <div class="column-group">
+        <div class="large-45 small-95 svard-mail-contact" ng-repeat="thing in awesomeThings">
+            <div class="column-group">
+                <div class="svard-mail-contact-photo large-20">
+                </div>
+                <div class="svard-mail-contact-info large-80">
+                    <p>{{thing}}</p>
+                    <p>Address</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column-group gutters">
+        <div class="large-100 medium-100 small-100">
+            <div class="push-right">
+                <button class="ink-button blue" ng-click="addContact()"><i class="icon-plus"></i> Add</button>
+            </div>
+        </div>
+    </div>
 </div>

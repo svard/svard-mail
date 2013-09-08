@@ -1,0 +1,24 @@
+.nav-background {
+    background: -moz-linear-gradient(top, #1a1a1a 0%, #0d0d0d 150%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1a1a1a), color-stop(150%, #0d0d0d));
+    background: -webkit-linear-gradient(top, #1a1a1a 0%, #0d0d0d 150%);
+    background: linear-gradient(to bottom, #1a1a1a 0%, #0d0d0d 150%);
+}
+
+.unstyled-button (@color: #bbbbbb) {
+    background: none;
+    border: none;
+    color: @color;
+    outline: none;
+}
+
+.icon-click (@transX: 1px, @transY: 1px) {
+    -webkit-transform: translate(@transX,@transY);
+    -moz-transform: translate(@transX,@transY);
+    transform: translate(@transX,@transY);
+}
+
+.border-radius(@radius: 5px) {
+    -moz-border-radius: @radius;
+    border-radius: @radius;
+}
