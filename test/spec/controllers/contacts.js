@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: ContactsCtrl', function () {
+xdescribe('Controller: ContactsCtrl', function () {
 
     // load the controller's module
     beforeEach(module('svardMailApp'));
