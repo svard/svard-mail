@@ -42,7 +42,7 @@ colors = true;
 
 // level of logging
 // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
-logLevel = LOG_INFO;
+logLevel = LOG_DEBUG;
 
 // enable / disable watching file and executing tests whenever any file changes
 autoWatch = false;
@@ -64,5 +64,5 @@ captureTimeout = 5000;
 // if true, it capture browsers, run tests and exit
 singleRun = true;
 junitReporter = {
-  outputFile: 'test-results.xml'
+  outputFile: '../test-results.xml'
 };
