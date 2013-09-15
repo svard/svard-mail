@@ -3,21 +3,21 @@
         <th class="content-left">
             <button title="Move selected to trash"><span class="icon-trash"></span></button>
         </th>
-        <th class="content-left from">From <i class="icon-sort" ng-click="sortBy('from[0].name')"></i></th>
+        <th class="content-left from">From <i class="icon-sort" ng-click="sortBy('from.name')"></i></th>
         <th class="content-left subject">Subject <i class="icon-sort" ng-click="sortBy('subject')"></i></th>
         <th class="content-left date">Date <i class="icon-caret-up" ng-click="sortBy('date')"></i></th>
         <th></th>
     </tr>
 </thead>
-<tbody>
-    <tr ng-repeat-start="header in headers | orderBy:sortingOrder:reverse" ng-class="isUnseen(header)">
+<tbody ng-repeat="header in headers | orderBy:sortingOrder:reverse" ng-controller="TableRowCtrl" ng-switch on="isPreviewSelected()">
+    <tr  ng-class="isUnseen()">
         <td><input type="checkbox" /></td>
-        <td>{{header.from[0].name}}</td>
-        <td ng-click="readMail(header)"><span class="svard-mail-clickable">{{header.subject}}</span></td>
+        <td>{{header.from.name}}</td>
+        <td ng-click="readMail()"><span class="svard-mail-clickable">{{header.subject}}</span></td>
         <td>{{header.date | date:'MMM d, HH:mm:ss'}}</td>
-        <td><button class="svard-mail-clickable" ng-click="toggleBody(header)"><i class="icon-chevron-down"></i></button></td>
+        <td><button class="svard-mail-clickable" ng-click="togglePreview()"><i ng-class="{'icon-chevron-down': !isPreviewSelected(), 'icon-chevron-up': isPreviewSelected()}"></i></button></td>
     </tr>
-    <tr ng-repeat-end class="svard-mail-uid-{{header.uid}} svard-mail-hide">
+    <tr ng-switch-when="true">
         <td colspan="5"><pre>{{header.text}}</pre></td>
     </tr>
 </tbody>

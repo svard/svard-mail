@@ -56,9 +56,9 @@ describe('TableDirectives', function () {
         }));
 
         it('should create a 3 rows in the table', function () {
-            var rows = element.find('tr');
+            var rows = element.find('tbody');
 
-            expect(rows.length).toBe(7); // 1 header row + 3 rows + 3 body text rows
+            expect(rows.length).toBe(3);
         });
 
         it('should display one mail as unseen', function () {
@@ -68,20 +68,20 @@ describe('TableDirectives', function () {
         });
 
         it('should toggle visibility of the body text', function () {
-            var clickedRow = element.find('tbody tr button').children().eq(0),
-                visibleBody = element.find('.svard-mail-hide');
+            var clickedRow = element.find('tbody tr button').eq(0),
+                visibleBody = element.find('tbody').eq(0).children();
 
-            expect(visibleBody.length).toBe(3);
+            expect(visibleBody.length).toBe(1);
 
             clickedRow.click();
 
-            visibleBody = element.find('.svard-mail-hide');
+            visibleBody = element.find('tbody').eq(0).children();
             expect(visibleBody.length).toBe(2);
 
             clickedRow.click();
 
-            visibleBody = element.find('.svard-mail-hide');
-            expect(visibleBody.length).toBe(3);
+            visibleBody = element.find('tbody').eq(0).children();
+            expect(visibleBody.length).toBe(1);
         });
     });
 });
