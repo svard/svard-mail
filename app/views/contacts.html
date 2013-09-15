@@ -2,11 +2,27 @@
     <div class="column-group">
         <div class="large-45 small-95 svard-mail-contact" ng-repeat="thing in awesomeThings">
             <div class="column-group">
-                <div class="svard-mail-contact-photo large-20">
+                <div class="svard-mail-contact-photo large-20 medium-20 small-20">
+                    <i class="icon-user icon-large"></i>
                 </div>
-                <div class="svard-mail-contact-info large-80">
-                    <p>{{thing}}</p>
-                    <p>Address</p>
+                <div class="svard-mail-contact-info large-75 medium-75 small-75">
+                    <form class="ink-form">
+                        <fieldset>
+                            <div class="control-group">
+                                <label for="text-input">Name</label> 
+                                <div class="control">
+                                    <input id="text-input" type="text" ng-model="thing">
+                                </div>
+                                <label for="text-input">Address</label> 
+                                <div class="control">
+                                    <input id="text-input" type="text" ng-model="thing">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="svard-mail-contact-action large-5 medium-5 small-5">
+                    <i class="icon-caret-down"></i>
                 </div>
             </div>
         </div>
