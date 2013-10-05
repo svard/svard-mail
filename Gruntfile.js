@@ -102,7 +102,8 @@ module.exports = function (grunt) {
         '<%= yeoman.app %>/scripts/{,*/}*.js',
         'app.js',
         'modules/*.js',
-        'routes/*.js'
+        'routes/*.js',
+        'authentication/*.js'
       ]
     },
     karma: {

@@ -1,0 +1,78 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>SvardMail</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- build:css styles/main.css -->
+        <link rel="stylesheet" href="styles/ink.css">
+        <link rel="stylesheet" href="styles/svardmail.css">
+        <!-- endbuild -->
+    </head>
+    <body>
+        <header class="ink-grid">
+            <div class="vspace">
+                <h1 class="hide-small">Login</h1>
+                <h3 class="show-small hide-medium hide-large">Login</h3>
+            </div>
+        </header>
+
+        <div class="svard-mail-login main-container ink-grid" ng-controller="LoginCtrl">
+            <div class="column-group">
+                <div class="large-10 medium-20 small-10">
+                    <p>&nbsp;</p>
+                </div>
+                <div class="large-90 medium-80 small-90">
+                    <div class="gutters">
+                        <form id="login" name="loginForm" class="ink-form large-40 medium-30 small-80" method="post" action="/login">
+                            <fieldset>
+                                <div class="control-group required">
+                                    <label for="email">Email: </label>
+                                    <div class="control prepend-symbol">
+                                        <span>
+                                            <input type="text" name="username" id="email" />
+                                            <i class="icon-envelope-alt"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="control-group required">
+                                    <label for="password">Password: </label>
+                                    <div class="control prepend-symbol">
+                                        <span>
+                                            <input type="password" name="password" id="password" />
+                                            <i class="icon-lock"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <button type="submit" name="sub" class="ink-button blue large-30 medium-40 small-100">Login</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+                <div class="large-10 medium-20 small-10">
+                    <p>&nbsp;</p>
+                </div>
+                <div class="large-90 medium-80 small-90">
+                    <% if (error != '') { %>
+                        <div class="ink-alert basic error large-40 medium-30 small-80">
+                            <p><%= error %></p>
+                        </div>
+                    <% } %>
+                    <% if (info != '') { %>
+                        <div class="ink-alert basic info large-40 medium-30 small-80">
+                            <p><%= info %></p>
+                        </div>
+                    <% } %>
+                </div>
+            </div>          
+        </div>
+    </body>
+</html>  

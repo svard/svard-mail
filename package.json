@@ -9,7 +9,13 @@
     "log4js": "~0.6.6",
     "mailparser": "~0.3.6",
     "q": "~0.9.6",
-    "underscore": "~1.5.1"
+    "underscore": "~1.5.1",
+    "bcrypt": "~0.7.7",
+    "passport": "~0.1.17",
+    "nodemailer": "~0.5.3",
+    "connect-flash": "~0.1.1",
+    "passport-local": "~0.1.6",
+    "mongoose": "~3.6.20"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

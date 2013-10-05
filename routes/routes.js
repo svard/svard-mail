@@ -1,13 +1,36 @@
-module.exports = function(app, logger) {
-    'use strict';
+'use strict';
+
+module.exports = function(app, passport, logger) {
 
     var Imap = require('imap'),
         _ = require('underscore'),
         Mail = require('../modules/Mail')(logger, Imap),
         utils = require('../modules/utils');
 
-    app.get('/', function(req, resp) {
+    var ensureAuthenticated = function (req, resp, next) {
+        if (req.isAuthenticated()) {
+            return next();
+        }
+        resp.redirect('/login');
+    };
+
+    app.get('/', ensureAuthenticated, function(req, resp) {
         resp.render('index.html');
+    });
+
+    app.get('/login', function(req, resp) {
+        resp.render('login.html', {error: req.flash('error'), info: req.flash('info')});
+    });
+
+    app.post('/login', passport.authenticate('local', {successRedirect: '/',
+                                                       failureRedirect: '/login',
+                                                       failureFlash: true})
+    );
+
+    app.get('/logout', function(req, resp) {
+        req.logout();
+        req.flash('info', 'Logged out');
+        resp.redirect('/login');
     });
 
     app.get('/headers/start/:from/count/:count', function(req, resp) {
