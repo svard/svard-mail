@@ -13,7 +13,9 @@ angular.module('svardMailApp')
                 }
 
                 ctrl.$formatters.unshift(function (value) {
-                    return value.replace(/\n/g, '<br />');
+                    if (value !== undefined) {
+                        return value.replace(/\n/g, '<br />');
+                    }
                 });
 
                 element.on('keyup change', function() {
