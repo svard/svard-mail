@@ -6,8 +6,6 @@ Webmail client and server. Mails are sent and fetched via the webmail server to 
 ###Stack
 
 - MongoDb - Persistent storage
-- ~~Express - HTTP routing~~
-- Compojure - HTTP routing
+- Express - HTTP routing
 - AngularJS - Client framework
-- ~~Node.js - Server platform~~
-- Tomcat - Server container
+- Node.js - Server platform
