@@ -208,7 +208,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.app %>',
-          src: ['*.html', 'views/*.html', 'views/templates/*.html'],
+          src: ['*.html', 'views/compose.html', 'views/compose_reply.html', 'views/contacts.html', 'views/main.html', 'views/templates/*.html'],
           dest: '<%= yeoman.dist %>'
         }]
       }
@@ -261,7 +261,8 @@ module.exports = function (grunt) {
             '.htaccess',
             'components/**/*',
             'img/*',
-            'font/*'
+            'font/*',
+            'views/login.html'
             // 'images/{,*/}*.{gif,webp}',
             // 'styles/fonts/*'
           ]
