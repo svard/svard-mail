@@ -1,8 +1,19 @@
 'use strict';
 
 angular.module('svardMailApp')
-    .controller('ComposeCtrl', ['$scope', function ($scope) {
-        $scope.body = {};
+    .controller('ComposeCtrl', ['$scope', 'Mailer', function ($scope, Mailer) {
+        $scope.body = {
+            from: null,
+            to: null,
+            cc: null,
+            subject: null,
+            text: null
+        };
+
+        $scope.sendMail = function () {
+            var mailer = new Mailer($scope.body);
+            mailer.$send();
+        };
     }])
 
     .controller('ComposeReplyCtrl', ['$scope', 'body', function ($scope, body) {

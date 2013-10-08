@@ -1,9 +1,10 @@
+'use strict';
+
 module.exports = function(logger, Imap) {
-    'use strict';
 
     var MailParser = require('mailparser').MailParser,
         Q = require('q'),
-        config = require('../config.json'),
+        config = require('../config'),
 
         imap = new Imap({
             user: config.imap.user,

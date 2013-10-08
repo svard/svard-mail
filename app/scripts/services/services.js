@@ -35,4 +35,8 @@ angular.module('svardMailApp')
 
             return deferred.promise;
         };
+    }])
+
+    .factory('Mailer', ['$resource', function ($resource) {
+        return $resource('/sendmail', {}, {send: {method: 'POST'}});
     }]);

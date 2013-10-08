@@ -13,7 +13,7 @@ angular.module('svardMailApp')
                 }
 
                 ctrl.$formatters.unshift(function (value) {
-                    if (value !== undefined) {
+                    if (value !== null) {
                         return value.replace(/\n/g, '<br />');
                     }
                 });

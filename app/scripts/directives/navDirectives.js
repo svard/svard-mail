@@ -20,7 +20,7 @@ angular.module('svardMailApp')
     .directive('navMailBoxes', function () {
         return {
             template: '<ul class="menu vertical shadowed blue">' +
-                    '<li ng-repeat="boxName in boxNames" ng-class="{active: isActive(boxName)}"><a href="">{{boxName}}</a></li>' +
+                    '<li ng-repeat="boxName in boxNames" ng-class="{active: isActive(boxName)}"><a>{{boxName}}</a></li>' +
                 '</ul>',
             scope: {boxNames: '=boxNames'},
             link: function postLink(scope, element) {

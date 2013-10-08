@@ -5,7 +5,9 @@ module.exports = function(app, passport, logger) {
     var Imap = require('imap'),
         _ = require('underscore'),
         Mail = require('../modules/Mail')(logger, Imap),
-        utils = require('../modules/utils');
+        SendMail = require('../modules/SendMail')(logger),
+        utils = require('../modules/utils'),
+        config = require('../config');
 
     var ensureAuthenticated = function (req, resp, next) {
         if (req.isAuthenticated()) {
@@ -71,4 +73,16 @@ module.exports = function(app, passport, logger) {
             resp.send(500);
         }
     });
+
+    app.post('/sendmail', function(req, resp) {
+        var reqParams = req.body,
+            // mail = SendMail.sendMail(req.user.username, req.user.password, reqParams.from, reqParams.to, reqParams.cc, reqParams.subject, reqParams.text);
+            mail = SendMail.sendMail(config.imap.user, config.imap.password, reqParams.from, reqParams.to, reqParams.cc, reqParams.subject, reqParams.text);
+
+        mail.then(function(response) {
+            resp.send(200);    
+        }, function(error) {
+            resp.send(500);
+        });
+    }); 
 };

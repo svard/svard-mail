@@ -12,8 +12,9 @@ module.exports = function(mongoose, logger) {
         username: { type: String, unique: true },
         password: { type: String },
         name: { type: String },
-        contacts: [Contact],
-        roles: [{ type: String }]
+        savedContacts: [Contact],
+        allContacts: [Contact],
+        roles: [{ type: String }],
     });
 
     var Profile = mongoose.model('Profile', ProfileSchema);
