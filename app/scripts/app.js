@@ -8,7 +8,7 @@ angular.module('svardMailApp', ['ngResource', 'ngRoute'])
                 controller: 'MainCtrl',
                 resolve: {
                     headers: ['HeaderLoader', function (HeaderLoader) {
-                        return new HeaderLoader(1, 3);
+                        return new HeaderLoader(1, 20);
                     }]
                 }
             })

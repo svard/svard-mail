@@ -4,6 +4,7 @@ module.exports = function(logger, Imap) {
 
     var MailParser = require('mailparser').MailParser,
         Q = require('q'),
+        _ = require('underscore'),
         config = require('../config'),
 
         imap = new Imap({
@@ -22,6 +23,10 @@ module.exports = function(logger, Imap) {
 
         imap.once('ready', function() {
             logger.info('Connected to imap at %s', config.imap.host);
+
+            imap.getBoxes(function(err, boxes) {
+                responseObj.mailBoxes = _.keys(boxes).reverse();
+            });
 
             imap.openBox('INBOX', true, function(err, box) {
                 if (err) {
@@ -47,7 +52,7 @@ module.exports = function(logger, Imap) {
                 responseObj.totalMsg = total;
                 responseObj.unreadMsg = box.messages.new;
 
-                var fetch = imap.seq.fetch(from + ':' + to, {struct: true, bodies: 'HEADER'});
+                var fetch = imap.seq.fetch(from + ':' + to, {struct: true, bodies: ''});
                 fetch.on('message', function(msg, seqno) {
                     var mailparser = new MailParser(),
                         mailObj = {};
@@ -57,7 +62,8 @@ module.exports = function(logger, Imap) {
                     msg.on('body', function(stream) {
                         mailparser.on('end', function(mail) {
                             mailObj.subject = mail.subject;
-                            mailObj.from = mail.from;
+                            mailObj.from = mail.from[0];
+                            mailObj.text = mail.text;
                             headers.push(mailObj);
                             if (headers.length === count) {
                                 responseObj.headers = headers;
