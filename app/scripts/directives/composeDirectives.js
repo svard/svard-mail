@@ -3,29 +3,40 @@
 angular.module('svardMailApp')
     .directive('editable', function () {
         return {
-            template: '<div contenteditable="true"></div>',
+            templateUrl: 'views/templates/editable.html',
             restrict: 'E',
             replace: true,
             require: '?ngModel',
             link: function postLink($scope, element, attrs, ctrl) {
+                var editableEl = element.find('.svard-mail-compose-editable');
+
                 if (!ctrl) {
                     return;
                 }
 
-                ctrl.$formatters.unshift(function (value) {
+                ctrl.$parsers.unshift(function (value) {
                     if (value !== null) {
-                        return value.replace(/\n/g, '<br />');
+                        return value.replace(/&gt;/g, '>').replace(/<div>/g, '\n').replace(/<\/div>/g, '').replace(/<br>/g, '\n');
                     }
                 });
 
-                element.on('keyup change', function() {
+                editableEl.on('keyup change', function() {
                     $scope.$apply(function() {
-                        ctrl.$setViewValue(element.html());
+                        ctrl.$setViewValue(editableEl.html());
                     });
                 });
 
                 ctrl.$render = function () {
-                    element.html(ctrl.$viewValue);
+                    editableEl.html(ctrl.$viewValue);
+                };
+
+                $scope.reply = function() {
+                    editableEl[0].focus();
+                    $scope.formatReply();
+                };
+
+                $scope.showReplyButton = function() {
+                    return attrs.reply !== undefined;
                 };
             }
         };

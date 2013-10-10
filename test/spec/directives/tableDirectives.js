@@ -40,7 +40,7 @@ describe('TableDirectives', function () {
                 }, {
                     "seqno": 10,
                     "uid": 10,
-                    "flags": ["\\Unseen"],
+                    "flags": ["\\Recent"],
                     "date": "2013-08-06T23:35:15.000Z",
                     "subject": "Hello",
                     "from": [{

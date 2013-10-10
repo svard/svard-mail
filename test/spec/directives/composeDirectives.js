@@ -8,6 +8,8 @@ describe('ComposeDirectives', function () {
     var element,
         scope;
 
+    beforeEach(module('views/templates/editable.html'));
+
     beforeEach(inject(function ($rootScope, $compile) {
         scope = $rootScope.$new();
         scope.body = {text: 'The mail body text'};
@@ -17,6 +19,8 @@ describe('ComposeDirectives', function () {
     }));
 
     it('should data-bind from model to view', function () {
-        expect(element.text()).toEqual(scope.body.text);
+        var editableEl = element.find('.svard-mail-compose-editable');
+
+        expect(editableEl.text()).toEqual(scope.body.text);
     });
 });

@@ -79,10 +79,10 @@ module.exports = function(app, passport, logger) {
             // mail = SendMail.sendMail(req.user.username, req.user.password, reqParams.from, reqParams.to, reqParams.cc, reqParams.subject, reqParams.text);
             mail = SendMail.sendMail(config.imap.user, config.imap.password, reqParams.from, reqParams.to, reqParams.cc, reqParams.subject, reqParams.text);
 
-        mail.then(function(response) {
-            resp.send(200);    
-        }, function(error) {
+        mail.then(function() {
+            resp.send(200);
+        }, function() {
             resp.send(500);
         });
-    }); 
+    });
 };

@@ -14,14 +14,19 @@ angular.module('svardMailApp', ['ngResource', 'ngRoute'])
             })
             .when('/compose', {
                 templateUrl: 'views/compose.html',
-                controller: 'ComposeCtrl'
+                controller: 'ComposeCtrl',
+                resolve: {
+                    mail: function () {
+                        return undefined;
+                    }
+                }
             })
             .when('/compose/:uid', {
                 templateUrl: 'views/compose_reply.html',
-                controller: 'ComposeReplyCtrl',
+                controller: 'ComposeCtrl',
                 resolve: {
-                    body: ['BodyLoader', function (BodyLoader) {
-                        return new BodyLoader();
+                    mail: ['MailLoader', function (MailLoader) {
+                        return new MailLoader();
                     }]
                 }
             })

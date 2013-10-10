@@ -1,8 +1,6 @@
 #svard-mail-compose {
     &-body {
         height: 300px;
-        padding: 0 5px 0 5px;
-        overflow: auto;
     }
 
     &-send {
@@ -12,4 +10,19 @@
 
 .svard-mail-compose {
     margin-top: 3.3em;
+
+    &-reply {
+        cursor: pointer;
+        line-height: 1em;
+        position: absolute;
+        top: 10px;
+        right: 20px;
+    }
+
+    &-editable {
+        height: 100%;
+        padding: 0 5px 0 5px;
+        overflow: auto;
+        white-space: pre;
+    }
 }

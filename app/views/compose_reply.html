@@ -5,33 +5,34 @@
                 <div class="control-group column-group gutters">
                     <label class="large-20 medium-20 small-20 content-right" for="to">To:</label> 
                     <div class="control large-60 medium-60 small-80">
-                        <input type="text" id="to" ng-model="body.to">
+                        <input type="text" id="to" ng-model="mail.to">
                     </div>
                 </div>
                 <div class="control-group column-group gutters">
                     <label class="large-20 medium-20 small-20 content-right" for="from">From:</label> 
                     <div class="control large-60 medium-60 small-80">
-                        <input type="text" id="from" value="{{getFromField()}}">
+                        <input type="text" id="from" ng-model="mail.from">
                     </div>
                 </div>
                 <div class="control-group column-group gutters">
                     <label class="large-20 medium-20 small-20 content-right" for="cc">Cc:</label> 
                     <div class="control large-60 medium-60 small-80">
-                        <input type="text" id="cc" ng-model="body.cc">
+                        <input type="text" id="cc" ng-model="mail.cc">
                     </div>
                 </div>
                 <div class="control-group column-group gutters">
                     <label class="large-20 medium-20 small-20 content-right" for="subject">Subject:</label> 
                     <div class="control large-60 medium-60 small-80">
-                        <input type="text" id="subject" ng-model="body.subject">
+                        <input type="text" id="subject" ng-model="mail.subject">
                     </div>
                 </div>
                 <div class="control-group column-group gutters">
                     <label class="large-20 medium-20 small-20 content-right" for="svard-mail-compose-body">Body:</label> 
                     <div class="control large-60 medium-60 small-80">
-                        <editable id="svard-mail-compose-body" ng-model="body.text"></editable>
+                        <editable id="svard-mail-compose-body" ng-model="mail.text" data-reply>
+                        </editable>
                         <div class="push-right">
-                            <button id="svard-mail-compose-send" class="ink-button blue"><i class="icon-envelope-alt"></i> Send</button>
+                            <button id="svard-mail-compose-send" class="ink-button blue" ng-click="sendMail()"><i class="icon-envelope-alt"></i> Send</button>
                         </div>
                     </div>
                 </div>

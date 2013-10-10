@@ -6,7 +6,7 @@ angular.module('svardMailApp')
         return $resource('../../mockmail.json');
     }])
 
-    .factory('MailBody', ['$resource', function ($resource) {
+    .factory('Mail', ['$resource', function ($resource) {
         // return $resource('/message/:uid');
         return $resource('../../mails/:uid.json', {});
     }])
@@ -32,13 +32,12 @@ angular.module('svardMailApp')
         };
     }])
 
-    .factory('BodyLoader', ['MailBody', '$route', '$q', '$cacheFactory', function (MailBody, $route, $q, $cacheFactory) {
+    .factory('MailLoader', ['Mail', '$route', '$q', '$cacheFactory', function (Mail, $route, $q, $cacheFactory) {
         return function () {
-            var deferred = $q.defer(),
-                mailCache;
+            var deferred = $q.defer();
 
             if ($cacheFactory.get('mailCache') === undefined) {
-                MailBody.get({uid: $route.current.params.uid}, function (body) {
+                Mail.get({uid: $route.current.params.uid}, function (body) {
                     deferred.resolve(body);
                 }, function () {
                     deferred.reject('Unable to fetch body, uid: ' + $route.current.params.uid);
@@ -48,7 +47,7 @@ angular.module('svardMailApp')
                     selectedMail;
 
                 selectedMail = _.find(mails.headers, function(mail) {
-                    return mail.uid == $route.current.params.uid;
+                    return mail.uid === parseInt($route.current.params.uid, 10);
                 });
 
                 deferred.resolve(selectedMail);

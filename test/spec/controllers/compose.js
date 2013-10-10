@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: ComposeCtrl', function () {
+xdescribe('Controller: ComposeCtrl', function () {
 
     // load the controller's module
     beforeEach(module('svardMailApp'));

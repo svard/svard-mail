@@ -7,7 +7,6 @@ angular.module('svardMailApp')
 
     .controller('TableRowCtrl', ['$scope', '$location', function ($scope, $location) {
 		$scope.previewSelected = false;
-		$scope.header.from = $scope.header.from[0];
 
 		$scope.togglePreview = function () {
             $scope.previewSelected = !$scope.previewSelected;
@@ -18,7 +17,7 @@ angular.module('svardMailApp')
         };
 
         $scope.isUnseen = function() {
-            if (_.contains($scope.header.flags, '\\Unseen')) {
+            if (_.contains($scope.header.flags, '\\Recent')) {
                 return 'svard-mail-unseen';
             }
         };

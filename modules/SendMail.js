@@ -36,7 +36,7 @@ module.exports = function(logger) {
                 logger.debug('Mail sent: %s', response.message);
                 deferred.resolve(response);
             } else {
-                logger.error('Failed to send mail: %s', error);
+                logger.error('Failed to send mail: %s', error.code);
                 deferred.reject(error);
             }
 
