@@ -11,6 +11,10 @@ angular.module('svardMailApp')
         return $resource('../../mails/:uid.json', {});
     }])
 
+    .factory('Profile', ['$resource', function ($resource) {
+        return $resource('/profile');
+    }])
+
     .factory('HeaderLoader', ['Headers', '$q', '$cacheFactory', function (Headers, $q, $cacheFactory) {
         return function (start, count) {
             var deferred = $q.defer(),
@@ -59,4 +63,18 @@ angular.module('svardMailApp')
 
     .factory('Mailer', ['$resource', function ($resource) {
         return $resource('/sendmail', {}, {send: {method: 'POST'}});
+    }])
+
+    .factory('ProfileLoader', ['Profile', '$q', function (Profile, $q) {
+        return function () {
+            var deferred = $q.defer();
+
+            Profile.get(function (profile) {
+                deferred.resolve(profile);
+            }, function () {
+                deferred.reject('Unable to fetch profile for id ' + id);
+            });
+
+            return deferred.promise;
+        };
     }]);

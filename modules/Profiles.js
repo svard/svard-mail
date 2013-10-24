@@ -24,7 +24,7 @@ module.exports = function(mongoose, logger) {
 
         Profile.findOne({username: username}, '_id username roles password', function (err, doc) {
             if (err) {
-                logger.error('Failed to look for user %s: %s', username, err);
+                logger.error('Failed to look for user %s: %s', username, err.message);
                 deferred.reject(err);
                 return;
             }
@@ -37,9 +37,9 @@ module.exports = function(mongoose, logger) {
     var findById = function (id) {
         var deferred = Q.defer();
 
-        Profile.findById(id, function (err, doc) {
+        Profile.findById(id, '-__v', function (err, doc) {
             if (err) {
-                logger.error('Failed to find id %s: %s', id, err);
+                logger.error('Failed to find id %s: %s', id, err.message);
                 deferred.reject(err);
                 return;
             }

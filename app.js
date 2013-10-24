@@ -53,7 +53,7 @@ app.configure(function(){
     });
 });
 
-require('./routes/routes')(app, passport, logger);
+require('./routes/routes')(app, passport, Profiles, logger);
 
 var port = process.env.PORT || 5000;
 http.createServer(app).listen(port, function() {

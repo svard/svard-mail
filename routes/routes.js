@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(app, passport, logger) {
+module.exports = function(app, passport, Profiles, logger) {
 
     var Imap = require('imap'),
         _ = require('underscore'),
@@ -81,6 +81,20 @@ module.exports = function(app, passport, logger) {
 
         mail.then(function() {
             resp.send(200);
+        }, function() {
+            resp.send(500);
+        });
+    });
+
+    app.get('/profile', function(req, resp) {
+        var profile = Profiles.findById(req.user._id);
+
+        profile.then(function(doc) {
+            if (doc !== null) {
+                resp.send(doc);
+            } else {
+                resp.send(404);
+            }
         }, function() {
             resp.send(500);
         });
