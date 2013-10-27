@@ -7,8 +7,8 @@ angular.module('svardMailApp', ['ngResource', 'ngRoute'])
                 templateUrl: 'views/main.html',
                 controller: 'MainCtrl',
                 resolve: {
-                    headers: ['HeaderLoader', function (HeaderLoader) {
-                        return new HeaderLoader(1, 20);
+                    mailbox: ['MailboxLoader', function (MailboxLoader) {
+                        return new MailboxLoader('INBOX');
                     }]
                 }
             })
@@ -26,7 +26,7 @@ angular.module('svardMailApp', ['ngResource', 'ngRoute'])
                 controller: 'ComposeCtrl',
                 resolve: {
                     mail: ['MailLoader', function (MailLoader) {
-                        return new MailLoader();
+                        return new MailLoader('INBOX');
                     }]
                 }
             })

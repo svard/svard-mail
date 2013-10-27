@@ -4,11 +4,10 @@ module.exports = function(logger) {
 
     var nodemailer = require('nodemailer'),
         Q = require('q'),
-        config = require('../config'),
-        transport;
+        config = require('../config');
 
     var setupTransport = function (username, password) {
-        transport = nodemailer.createTransport('SMTP', {
+        return nodemailer.createTransport('SMTP', {
             host: config.smtp.host,
             secureConnection: false,
             port: config.smtp.port,
@@ -21,9 +20,8 @@ module.exports = function(logger) {
     };
 
     var sendMail = function (username, password, from, to, cc, subject, text) {
-        var deferred = Q.defer();
-
-        setupTransport(username, password);
+        var deferred = Q.defer(),
+            transport = setupTransport(username, password);
 
         transport.sendMail({
             from: from,

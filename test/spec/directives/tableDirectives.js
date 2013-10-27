@@ -15,7 +15,7 @@ describe('TableDirectives', function () {
         beforeEach(inject(function ($rootScope, $compile) {
             scope = $rootScope.$new();
             scope.box = {
-                headers: [{
+                messages: [{
                     "seqno": 8,
                     "uid": 8,
                     "flags": ["\\Seen"],
@@ -50,12 +50,12 @@ describe('TableDirectives', function () {
                     "text": "Test\n"
                 }]
             };
-            element = angular.element('<table mail-table headers="box.headers"></table>');
+            element = angular.element('<table mail-table messages="box.messages"></table>');
             element = $compile(element)(scope);
             scope.$digest();
         }));
 
-        it('should create a 3 rows in the table', function () {
+        it('should create 3 rows in the table', function () {
             var rows = element.find('tbody');
 
             expect(rows.length).toBe(3);

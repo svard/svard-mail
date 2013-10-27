@@ -9,15 +9,15 @@
         <th></th>
     </tr>
 </thead>
-<tbody ng-repeat="header in headers | orderBy:sortingOrder:reverse" ng-controller="TableRowCtrl" ng-switch on="isPreviewSelected()">
+<tbody ng-repeat="message in messages | orderBy:sortingOrder:reverse" ng-controller="TableRowCtrl" ng-switch on="isPreviewSelected()">
     <tr  ng-class="isUnseen()">
         <td><input type="checkbox" /></td>
-        <td>{{header.from.name}}</td>
-        <td ng-click="readMail()"><span class="svard-mail-clickable">{{header.subject}}</span></td>
-        <td>{{header.date | date:'MMM d, HH:mm:ss'}}</td>
+        <td>{{message.from.name}}</td>
+        <td ng-click="readMail()"><span class="svard-mail-clickable">{{message.subject}}</span></td>
+        <td>{{message.date | date:'MMM d, HH:mm:ss'}}</td>
         <td><button class="svard-mail-clickable" ng-click="togglePreview()"><i ng-class="{'icon-chevron-down': !isPreviewSelected(), 'icon-chevron-up': isPreviewSelected()}"></i></button></td>
     </tr>
     <tr ng-switch-when="true">
-        <td colspan="5"><pre>{{header.text}}</pre></td>
+        <td colspan="5"><pre>{{message.text}}</pre></td>
     </tr>
 </tbody>

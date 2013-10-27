@@ -5,7 +5,7 @@ angular.module('svardMailApp')
         return {
             templateUrl: 'views/templates/mailTable.html',
             scope: {
-                headers: '=headers'
+                messages: '=messages'
             },
             link: function postLink($scope, element) {
                 $scope.sortingOrder = 'date';

@@ -1,30 +1,30 @@
 'use strict';
 
 angular.module('svardMailApp')
-    .factory('Headers', ['$resource', function ($resource) {
-        // return $resource('/headers/start/:start/count/:count', {start: 1, count: 10});
-        return $resource('../../mockmail.json');
+    .factory('Mailbox', ['$resource', function ($resource) {
+        return $resource('/message/:mailbox');
+        // return $resource('../../mockmail.json');
     }])
 
     .factory('Mail', ['$resource', function ($resource) {
-        // return $resource('/message/:uid');
-        return $resource('../../mails/:uid.json', {});
+        return $resource('/message/:mailbox/:uid');
+        // return $resource('../../mails/:uid.json', {});
     }])
 
     .factory('Profile', ['$resource', function ($resource) {
         return $resource('/profile');
     }])
 
-    .factory('HeaderLoader', ['Headers', '$q', '$cacheFactory', function (Headers, $q, $cacheFactory) {
-        return function (start, count) {
+    .factory('MailboxLoader', ['Mailbox', '$q', '$cacheFactory', function (Mailbox, $q, $cacheFactory) {
+        return function (mailbox) {
             var deferred = $q.defer(),
                 mailCache;
 
             if ($cacheFactory.get('mailCache') === undefined) {
-                Headers.get({start: start, count: count}, function (headers) {
+                Mailbox.get({mailbox: mailbox}, function (mails) {
                     mailCache = $cacheFactory('mailCache');
-                    mailCache.put('mails', headers);
-                    deferred.resolve(headers);
+                    mailCache.put('mails', mails);
+                    deferred.resolve(mails);
                 }, function () {
                     deferred.reject('Unable to fetch headers');
                 });
@@ -37,20 +37,21 @@ angular.module('svardMailApp')
     }])
 
     .factory('MailLoader', ['Mail', '$route', '$q', '$cacheFactory', function (Mail, $route, $q, $cacheFactory) {
-        return function () {
+        return function (mailbox) {
             var deferred = $q.defer();
 
             if ($cacheFactory.get('mailCache') === undefined) {
-                Mail.get({uid: $route.current.params.uid}, function (body) {
-                    deferred.resolve(body);
+                console.log(mailbox + ' ' + $route.current.params.uid);
+                Mail.get({mailbox: mailbox, uid: $route.current.params.uid}, function (mail) {
+                    deferred.resolve(mail);
                 }, function () {
-                    deferred.reject('Unable to fetch body, uid: ' + $route.current.params.uid);
+                    deferred.reject('Unable to fetch mail, uid: ' + $route.current.params.uid);
                 });
             } else {
                 var mails = $cacheFactory.get('mailCache').get('mails'),
                     selectedMail;
 
-                selectedMail = _.find(mails.headers, function(mail) {
+                selectedMail = _.find(mails.selectedMailBoxContent.messages, function(mail) {
                     return mail.uid === parseInt($route.current.params.uid, 10);
                 });
 
@@ -71,8 +72,8 @@ angular.module('svardMailApp')
 
             Profile.get(function (profile) {
                 deferred.resolve(profile);
-            }, function () {
-                deferred.reject('Unable to fetch profile for id ' + id);
+            }, function (err) {
+                deferred.reject('Unable to fetch profile: %s', err.message);
             });
 
             return deferred.promise;

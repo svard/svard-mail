@@ -15,7 +15,7 @@
         <div class="svard-mail-table large-80 medium-80 small-100">
             <div class="column-group gutters">
                 <div class="svard-mail-summary large-70 medium-60 small-60">
-                    <p>You have<span class="ink-badge red">{{box.unreadMsg}}</span> unread mails out of<span class="ink-badge blue">{{box.totalMsg}}</span></p>
+                    <p>You have<span class="ink-badge red">{{box.selectedMailBoxContent.unreadMsgs}}</span> unread mails out of<span class="ink-badge blue">{{box.selectedMailBoxContent.totalMsgs}}</span></p>
                 </div>
                 <div class="svard-mail-search large-30 medium-40 small-40">
                     <form class="ink-form">
@@ -30,7 +30,7 @@
                     </form>
                 </div>
             </div>
-            <table class="ink-table" mail-table headers="box.headers">
+            <table class="ink-table" mail-table messages="box.selectedMailBoxContent.messages">
             </table>
         </div>
     </div>

@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('svardMailApp')
-    .controller('MainCtrl', ['$scope', 'headers', function ($scope, headers) {
-        $scope.box = headers;
+    .controller('MainCtrl', ['$scope', 'mailbox', function ($scope, mailbox) {
+        $scope.box = mailbox;
     }])
 
     .controller('TableRowCtrl', ['$scope', '$location', function ($scope, $location) {
@@ -17,12 +17,12 @@ angular.module('svardMailApp')
         };
 
         $scope.isUnseen = function() {
-            if (_.contains($scope.header.flags, '\\Recent')) {
+            if (_.contains($scope.message.flags, '\\Recent')) {
                 return 'svard-mail-unseen';
             }
         };
 
         $scope.readMail = function() {
-            $location.path('/compose/' + $scope.header.uid);
+            $location.path('/compose/' + $scope.message.uid);
         };
     }]);

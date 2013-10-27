@@ -13,15 +13,15 @@ describe('Service: services', function () {
     });
 
     // instantiate service
-    var headers, loader, mockBackend;
-    beforeEach(inject(function(_$httpBackend_, HeaderLoader) {
-        loader = HeaderLoader;
+    var mailbox, loader, mockBackend;
+    beforeEach(inject(function(_$httpBackend_, MailboxLoader) {
+        loader = MailboxLoader;
         mockBackend = _$httpBackend_;
     }));
 
-    it('should load headers and number of total and unread messages', function () {
-        // mockBackend.expectGET('/headers/start/1/count/3').respond({totalMsg: 3, unreadMsg: 0, headers: [
-        mockBackend.expectGET('../../mockmail.json?count=3&start=1').respond({totalMsg: 3, unreadMsg: 0, headers: [
+    it('should load mails in mailbox and number of total and unread messages', function () {
+        mockBackend.expectGET('/message/INBOX').respond({totalMsgs: 3, unreadMsgs: 0, selectedMailBoxContent: { messages: [
+        // mockBackend.expectGET('../../mockmail.json?mailbox=INBOX').respond({totalMsgs: 3, unreadMsgs: 0, selectedMailBoxContent: { messages: [
             {
                 "seqno": 1,
                 "uid": 1,
@@ -55,20 +55,20 @@ describe('Service: services', function () {
                     "name": "Kristofer Svärd"
                 }]
             }
-        ]});
+        ]}});
 
-        var promise = loader(1, 3);
-        promise.then(function(h) {
-            headers = h;
+        var promise = loader('INBOX');
+        promise.then(function(result) {
+            mailbox = result;
         });
 
-        expect(headers).toBeUndefined();
+        expect(mailbox).toBeUndefined();
 
         mockBackend.flush();
 
-        expect(headers.totalMsg).toBe(3);
-        expect(headers.unreadMsg).toBe(0);
-        expect(headers.headers.length).toBe(3);
+        expect(mailbox.totalMsgs).toBe(3);
+        expect(mailbox.unreadMsgs).toBe(0);
+        expect(mailbox.selectedMailBoxContent.messages.length).toBe(3);
     });
 
 });
