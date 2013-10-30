@@ -2,20 +2,15 @@
 
 angular.module('svardMailApp')
     .controller('ContactsCtrl', ['$scope', function ($scope) {
-        $scope.contactId = 1;
-        $scope.contacts = [
-            {name: 'Annie Huang', address: 'juan.svard@gmail.com', id: $scope.contactId++},
-            {name: 'Kristofer Svärd', address: 'kristofer.svard@gmail.com', id: $scope.contactId++}
-        ];
-
         $scope.addContact = function () {
-            $scope.contacts.push({name: '', address: '', id: $scope.contactId++});
+            $scope.profile.savedContacts.push({name: '', email: ''});
         };
     }])
 
-    .controller('ContactCtrl', ['$scope', function ($scope) {
+    .controller('ContactCtrl', ['$scope', '$timeout', 'Contact', function ($scope, $timeout, Contact) {
         $scope.actionMenuVisible = false;
         $scope.actionMenuStyle = {display: 'none'};
+        $scope.savedToastVisible = false;
 
         $scope.toggleActionMenu = function () {
             $scope.actionMenuVisible = !$scope.actionMenuVisible;
@@ -26,7 +21,46 @@ angular.module('svardMailApp')
             }
         };
 
+        $scope.saveContact = function (index) {
+            var contact = new Contact({
+                name: $scope.contact.name,
+                email: $scope.contact.email
+            });
+
+            if ($scope.profile.savedContacts[index]._id === undefined) {
+                contact.$save().then(function (response) {
+                    $scope.profile.savedContacts[index]._id = response._id;
+                    $scope.showToast();
+                });
+            } else {
+                contact.$update({id: $scope.profile.savedContacts[index]._id}).then(function () {
+                    $scope.showToast();
+                });
+            }
+
+            $scope.toggleActionMenu();
+        };
+
         $scope.deleteContact = function (index) {
-            $scope.contacts.splice(index, 1);
+            var contact = new Contact();
+            contact.$delete({id: $scope.profile.savedContacts[index]._id});
+            $scope.profile.savedContacts.splice(index, 1);
+
+            $scope.toggleActionMenu();
+        };
+
+        $scope.showToast = function () {
+            $scope.savedToastVisible = !$scope.savedToastVisible;
+            $timeout(function () {
+                $scope.savedToastVisible = !$scope.savedToastVisible;
+            }, 2000);
+        }
+
+        $scope.toggleSavedToast = function () {
+            if ($scope.savedToastVisible) {
+                return 'svard-mail-contact-saved-visible';
+            } else {
+                return 'svard-mail-contact-saved-invisible';
+            }
         };
     }]);

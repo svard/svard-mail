@@ -1,9 +1,14 @@
 <div class="svard-mail-content ink-grid">
     <div class="column-group">
-        <div class="large-45 small-95 svard-mail-contact" ng-repeat="contact in contacts" ng-controller="ContactCtrl">
+        <div class="large-45 small-95 svard-mail-contact" ng-repeat="contact in profile.savedContacts" ng-controller="ContactCtrl">
             <div class="column-group">
                 <div class="svard-mail-contact-photo large-20 medium-20 small-20">
-                    <i class="icon-user icon-large"></i>
+                    <div class="svard-mail-contact-icon">
+                        <i class="icon-user icon-large"></i>
+                    </div>
+                    <div class="svard-mail-contact-saved" ng-class="toggleSavedToast()">
+                        <p class="ink-label success">Saved</p>
+                    </div>
                 </div>
                 <div class="svard-mail-contact-info large-75 medium-75 small-75">
                     <form class="ink-form">
@@ -15,7 +20,7 @@
                                 </div>
                                 <label for="text-input">Mail address</label> 
                                 <div class="control">
-                                    <input id="text-input" type="text" ng-model="contact.address">
+                                    <input id="text-input" type="text" ng-model="contact.email">
                                 </div>
                             </div>
                         </fieldset>
@@ -26,7 +31,7 @@
                         <i ng-if="actionMenuVisible" class="icon-caret-up" class ng-click="toggleActionMenu()"></i>
                         <i ng-if="!actionMenuVisible" class="icon-caret-down" class ng-click="toggleActionMenu()"></i>
                         <ul class="dropdown-menu" ng-style="actionMenuStyle">
-                            <li><a>Save</a></li>
+                            <li><a ng-click="saveContact($index)">Save</a></li>
                             <li><a ng-click="deleteContact($index)">Delete</a></li>
                         </ul>
                     </div>

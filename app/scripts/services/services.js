@@ -2,17 +2,23 @@
 
 angular.module('svardMailApp')
     .factory('Mailbox', ['$resource', function ($resource) {
-        return $resource('/message/:mailbox');
-        // return $resource('../../mockmail.json');
+        // return $resource('/message/:mailbox');
+        return $resource('../../mockmail.json');
     }])
 
     .factory('Mail', ['$resource', function ($resource) {
-        return $resource('/message/:mailbox/:uid');
-        // return $resource('../../mails/:uid.json', {});
+        // return $resource('/message/:mailbox/:uid');
+        return $resource('../../mails/:uid.json', {});
     }])
 
     .factory('Profile', ['$resource', function ($resource) {
         return $resource('/profile');
+    }])
+
+    .factory('Contact', ['$resource', function ($resource) {
+        return $resource('/contact/:id', {}, {
+            update: {method: 'PUT'}
+        });
     }])
 
     .factory('MailboxLoader', ['Mailbox', '$q', '$cacheFactory', function (Mailbox, $q, $cacheFactory) {

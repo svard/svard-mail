@@ -5,10 +5,24 @@
     margin: 1em 1em;
     .border-radius(3px);
 
-    &-photo {
+    &-icon {
         text-align: center;
         font-size: 4em;
         margin-top: .5em;
+    }
+
+    &-saved {
+        margin-top: 0.6em;
+        text-align: center;
+
+        &-visible {
+            opacity: 1;
+        }
+
+        &-invisible {
+            opacity: 0;
+            transition: opacity 2s ease;
+        }
     }
 
     &-info {

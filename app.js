@@ -34,11 +34,11 @@ var Profiles = require('./modules/Profiles')(mongoose, logger);
 require('./authentication/passport')(passport, Profiles);
 
 app.configure(function(){
-    app.set('views', __dirname + '/dist/views');
+    app.set('views', __dirname + '/app/views');
     //app.set('view engine', 'jade');
     app.use(express.bodyParser());
     app.use(express.methodOverride());
-    app.use(express.static(__dirname + '/dist'));
+    app.use(express.static(__dirname + '/app'));
     app.use(express.cookieParser('secret keyboard cat'));
     app.use(express.session());
     app.use(passport.initialize());

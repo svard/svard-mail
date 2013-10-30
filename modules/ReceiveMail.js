@@ -9,13 +9,13 @@ module.exports = function(logger, Imap) {
         config = require('../config'),
         defaultBox = 'INBOX';
 
-    var setupImap = function(username, password) {
-    // var setupImap = function() {
+    // var setupImap = function(username, password) {
+    var setupImap = function() {
         return new Imap({
-            // user: config.imap.user,
-            // password: config.imap.password,
-            user: username,
-            password: password,
+            user: config.imap.user,
+            password: config.imap.password,
+            // user: username,
+            // password: password,
             host: config.imap.host,
             port: config.imap.port,
             tls: true,
