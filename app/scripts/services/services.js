@@ -41,7 +41,6 @@ angular.module('svardMailApp')
             var deferred = $q.defer();
 
             if ($cacheFactory.get('mailCache') === undefined) {
-                console.log(mailbox + ' ' + $route.current.params.uid);
                 Mail.get({mailbox: mailbox, uid: $route.current.params.uid}, function (mail) {
                     deferred.resolve(mail);
                 }, function () {
