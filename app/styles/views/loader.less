@@ -1,0 +1,54 @@
+.svard-mail-loader {
+    position: absolute;
+    top: 40%;
+    left: 45%;
+    text-align: center;
+
+    h2 {
+        color: #000;
+        border-radius: 6px;
+        margin: 0;
+        font-size: .8em;
+        text-transform: lowercase;
+        letter-spacing: .1em;
+    }
+
+    span {
+        display: inline-block;
+        vertical-align: middle;
+        width: .6em;
+        height: .6em;
+        margin: .2em;
+        background: #000000;
+        border-radius: .6em;
+        -webkit-animation: loading 1s infinite alternate;
+    }
+
+    span:nth-of-type(2) {
+        -webkit-animation-delay: 0.2s;
+    }
+    span:nth-of-type(3) {
+        -webkit-animation-delay: 0.4s;
+    }
+    span:nth-of-type(4) {
+        -webkit-animation-delay: 0.6s;
+    }
+    span:nth-of-type(5) {
+        -webkit-animation-delay: 0.8s;
+    }
+    span:nth-of-type(6) {
+        -webkit-animation-delay: 1.0s;
+    }
+    span:nth-of-type(7) {
+        -webkit-animation-delay: 1.2s;
+    }
+}
+
+@-webkit-keyframes loading {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

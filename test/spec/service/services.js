@@ -27,8 +27,8 @@ describe('Service: services', function () {
     });
 
     it('should load mails in mailbox and number of total and unread messages', function () {
-        // stubBackend.expectGET('/message/INBOX').respond({totalMsgs: 3, unreadMsgs: 0, selectedMailBoxContent: { messages: [
-        stubBackend.expectGET('../../mockmail.json?mailbox=INBOX').respond({totalMsgs: 3, unreadMsgs: 0, selectedMailBoxContent: { messages: [
+        stubBackend.expectGET('/message/INBOX').respond({totalMsgs: 3, unreadMsgs: 0, selectedMailBoxContent: { messages: [
+        // stubBackend.expectGET('../../mockmail.json?mailbox=INBOX').respond({totalMsgs: 3, unreadMsgs: 0, selectedMailBoxContent: { messages: [
             {
                 "seqno": 1,
                 "uid": 1,
