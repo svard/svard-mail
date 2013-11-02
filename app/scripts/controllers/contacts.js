@@ -54,7 +54,7 @@ angular.module('svardMailApp')
             $timeout(function () {
                 $scope.savedToastVisible = !$scope.savedToastVisible;
             }, 2000);
-        }
+        };
 
         $scope.toggleSavedToast = function () {
             if ($scope.savedToastVisible) {
