@@ -13,15 +13,29 @@ describe('Controller: MainCtrl', function () {
         scope = $rootScope.$new();
         MainCtrl = $controller('MainCtrl', {
             $scope: scope,
-            headers: {
+            mailbox: {
                 totalMsg: 10,
                 unreadMsg: 2,
-                headers: []
+                selectedMailBoxContent: { 
+                    messages: [{
+                        "seqno": 1,
+                        "uid": 1,
+                        "flags": ["\\Seen"],
+                        "date": "2013-07-17T15:23:53.000Z",
+                        "subject": "Re: test",
+                        "from": [{
+                            "address": "john.doe@gmail.com",
+                            "name": "John Doe"
+                        }]
+                    }]
+                }
             }
         });
     }));
 
-    // it('should fetch number of total and unread mail', function () {
-    //     expect(MainCtrl).toBeDefined();
-    // });
+    it('should clear the currently loaded mailbox', function () {
+        expect(scope.box).toBeDefined();
+        scope.clearMailbox();
+        expect(scope.box).toBeNull();
+    });
 });

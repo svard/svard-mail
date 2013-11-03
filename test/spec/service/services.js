@@ -36,8 +36,8 @@ describe('Service: services', function () {
                 "date": "2013-07-17T15:23:53.000Z",
                 "subject": "Re: test",
                 "from": [{
-                    "address": "kristofer.svard@gmail.com",
-                    "name": "Kristofer Svärd"
+                    "address": "john.doe@gmail.com",
+                    "name": "John Doe"
                 }]
             }, 
             {
@@ -45,10 +45,10 @@ describe('Service: services', function () {
                 "uid": 2,
                 "flags": ["\\Seen"],
                 "date": "2013-07-17T16:00:19.000Z",
-                "subject": "Re: Can I send?",
+                "subject": "Re: Hello there?",
                 "from": [{
-                    "address": "kristofer.svard@gmail.com",
-                    "name": "Kristofer Svärd"
+                    "address": "john.doe@gmail.com",
+                    "name": "John Doe"
                 }]
             }, 
             {
@@ -58,8 +58,8 @@ describe('Service: services', function () {
                 "date": "2013-07-17T16:17:02.000Z",
                 "subject": "First mail",
                 "from": [{
-                    "address": "kristofer.svard@gmail.com",
-                    "name": "Kristofer Svärd"
+                    "address": "john.doe@gmail.com",
+                    "name": "John Doe"
                 }]
             }
         ]}});

@@ -17,25 +17,21 @@ angular.module('svardMailApp')
         };
     })
 
-    .directive('navMailBoxes', function () {
+    .directive('navMailBoxes', ['$location', function ($location) {
         return {
             template: '<ul class="menu vertical shadowed blue">' +
-                    '<li ng-repeat="boxName in boxNames" ng-class="{active: isActive(boxName)}"><a>{{boxName}}</a></li>' +
+                    '<li ng-repeat="boxName in box.mailBoxes" ng-class="{active: isActive(boxName)}" ng-click="changeMailbox(boxName)"><a>{{boxName}}</a></li>' +
                 '</ul>',
-            scope: {boxNames: '=boxNames'},
-            link: function postLink(scope, element) {
-                var list = element.children();
-                scope.active = 'INBOX';
-
-                list.bind('click', function(e) {
-                    scope.$apply(function() {
-                        scope.active = e.target.text;
-                    });
-                });
+            link: function postLink(scope) {
+                scope.changeMailbox = function(name) {
+                    scope.setActiveMailbox(name);
+                    scope.clearMailbox();
+                    $location.path('/mailbox/' + name);
+                };
 
                 scope.isActive = function(name) {
-                    return name === scope.active;
+                    return name === scope.activeMailbox;
                 };
             }
         };
-    });
+    }]);

@@ -59,12 +59,18 @@ describe('NavDirectives', function () {
     describe('navMailBoxes', function () {
         var element,
             scope,
-            MainCtrl;
+            MainCtrl,
+            $location;
 
-        beforeEach(inject(function ($rootScope, $compile) {
+        beforeEach(inject(function ($rootScope, $compile, _$location_) {
+            $location = _$location_;
             scope = $rootScope.$new();
-            scope.box = {mailBoxes: ["INBOX", "Sent", "Trash"]};
-            element = angular.element('<nav class="ink-navigation" nav-mail-boxes box-names="box.mailBoxes"></nav>');
+            scope.box = {
+                mailBoxes: ["INBOX", "Sent", "Trash"]
+            };
+            scope.setActiveMailbox = function () {};
+            scope.clearMailbox = function () {};
+            element = angular.element('<nav class="ink-navigation" nav-mail-boxes></nav>');
             element = $compile(element)(scope);
             scope.$digest();
         }));
@@ -73,6 +79,21 @@ describe('NavDirectives', function () {
             var listElem = angular.element(element.find('li'));
 
             expect(listElem.length).toBe(3);
+        });
+
+        it('should change route when navigation items are clicked', function () {
+            var inboxListItem = angular.element(element.find('li')).eq(0),
+                sentListItem = angular.element(element.find('li')).eq(1),
+                trashListItem = angular.element(element.find('li')).eq(2);
+
+            sentListItem.click();
+            expect($location.path()).toEqual('/mailbox/Sent');
+
+            trashListItem.click();
+            expect($location.path()).toEqual('/mailbox/Trash');
+
+            inboxListItem.click();
+            expect($location.path()).toEqual('/mailbox/INBOX');
         });
     });
 });

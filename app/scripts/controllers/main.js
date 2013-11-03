@@ -2,6 +2,10 @@
 
 angular.module('svardMailApp')
     .controller('MainCtrl', ['$scope', 'mailbox', function ($scope, mailbox) {
+        $scope.clearMailbox = function () {
+            $scope.box = null;
+        };
+
         $scope.box = mailbox;
     }])
 

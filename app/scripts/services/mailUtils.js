@@ -6,7 +6,7 @@ angular.module('svardMailApp')
             initMail: function (mail, profile) {
                 if (mail.from !== undefined) {
                     mail.from = this.formatAddress(mail.from.name, mail.from.address);
-                    mail.to = this.formatAddress(profile.name, profile.username);
+                    mail.to = this.formatAddress(mail.to.name, mail.to.address);
                     mail.cc = mail.cc || null;
                     return mail;
                 } else {

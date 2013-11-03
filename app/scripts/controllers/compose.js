@@ -1,16 +1,19 @@
 'use strict';
 
 angular.module('svardMailApp')
-    .controller('ComposeCtrl', ['$scope', 'Mailer', '$location', 'MailUtils', 'mail', function ($scope, Mailer, $location, MailUtils, mail) {
+    .controller('ComposeCtrl', ['$scope', 'Mailer', '$location', 'MailUtils', 'MailLoader', function ($scope, Mailer, $location, MailUtils, MailLoader) {
         var mailCopy = {};
-        angular.copy(mail, mailCopy);
-        $scope.mail = MailUtils.initMail(mailCopy, $scope.profile);
+
+        new MailLoader($scope.activeMailbox).then(function (mail) {
+            angular.copy(mail, mailCopy);
+            $scope.mail = MailUtils.initMail(mailCopy, $scope.profile);
+        });
 
         $scope.sendMail = function () {
             var mailer = new Mailer($scope.mail);
 
             mailer.$send();
-            $location.path('/');
+            $location.path('/mailbox/' + $scope.activeMailbox);
         };
 
         $scope.formatReply = function () {

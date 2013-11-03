@@ -9,13 +9,10 @@ module.exports = function(logger, Imap) {
         config = require('../config'),
         defaultBox = 'INBOX';
 
-    // var setupImap = function(username, password) {
-    var setupImap = function() {
+    var setupImap = function(username, password) {
         return new Imap({
-            user: config.imap.user,
-            password: config.imap.password,
-            // user: username,
-            // password: password,
+            user: username,
+            password: password,
             host: config.imap.host,
             port: config.imap.port,
             tls: true,
@@ -104,6 +101,7 @@ module.exports = function(logger, Imap) {
         mailparser.on('end', function(mail) {
             parsedMsgObj.subject = mail.subject;
             parsedMsgObj.from = mail.from[0];
+            parsedMsgObj.to = mail.to[0];
             parsedMsgObj.text = mail.text;
 
             callback(null, parsedMsgObj);
