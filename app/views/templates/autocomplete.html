@@ -1,0 +1,6 @@
+<input type="text" ng-blur="inputHasFocus=false" ng-focus="inputHasFocus=true" ng-keyup="checkInput($event)" />
+<div class="svard-mail-compose-autocomplete" ng-show="showAutoComplete()">
+    <ul>
+        <li ng-repeat="match in contactMatches" ng-class="{'svard-mail-compose-autocomplete-highlight': $index === focusIndex}"><i class="icon-user"></i> {{match.name}} &lt;{{match.email}}&gt;</li>
+    </ul>
+</div>

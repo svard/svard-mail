@@ -5,7 +5,7 @@
                 <div class="control-group column-group gutters">
                     <label class="large-20 medium-20 small-20 content-right" for="to">To:</label> 
                     <div class="control large-60 medium-60 small-80">
-                        <input type="text" id="to" ng-model="mail.to">
+                        <autocomplete id="to" ng-model="mail.to" contacts="profile.savedContacts"></autocomplete>
                     </div>
                 </div>
                 <div class="control-group column-group gutters">
@@ -17,7 +17,7 @@
                 <div class="control-group column-group gutters">
                     <label class="large-20 medium-20 small-20 content-right" for="cc">Cc:</label> 
                     <div class="control large-60 medium-60 small-80">
-                        <input type="text" id="cc" ng-model="mail.cc">
+                        <autocomplete id="to" ng-model="mail.cc" contacts="profile.savedContacts"></autocomplete>
                     </div>
                 </div>
                 <div class="control-group column-group gutters">
