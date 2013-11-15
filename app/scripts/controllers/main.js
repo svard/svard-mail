@@ -11,6 +11,7 @@ angular.module('svardMailApp')
 
     .controller('TableRowCtrl', ['$scope', '$location', function ($scope, $location) {
 		$scope.previewSelected = false;
+        $scope.message.delete = false;
 
 		$scope.togglePreview = function () {
             $scope.previewSelected = !$scope.previewSelected;

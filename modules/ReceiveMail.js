@@ -42,7 +42,7 @@ module.exports = function(logger, Imap) {
         imap.once('ready', function() {
             logger.info('Connected to imap at %s', config.imap.host);
 
-            imap.openBox(box, true, function(err) {
+            imap.openBox(box, false, function(err) {
                 if (err) {
                     callback(err);
                     return;
@@ -59,13 +59,19 @@ module.exports = function(logger, Imap) {
         imap.connect();
     };
 
-    var disconnect = function(imap, callback) {
+    var disconnect = function(imap, result, callback) {
         imap.once('end', function() {
             logger.info('Disconnected from %s', config.imap.host);
-            callback();
+            callback(null, result);
         });
 
-        imap.end();
+        imap.closeBox(function (err) {
+            if (err) {
+                callback(err);
+                return;
+            }
+            imap.end();
+        });
     };
 
     var getBoxes = function(imap, callback) {
@@ -120,8 +126,9 @@ module.exports = function(logger, Imap) {
         });
     };
 
-    var fetchFromBox = function(imap, fetch, callback) {
-        var msgs = [];
+    var fetch = function(imap, uid, callback) {
+        var msgs = [],
+            fetch = imap.fetch(uid, {struct: true, bodies: ''});
 
         fetch.on('message', function(msg, seqno) {
             var receivedMsg = {seqno: seqno};
@@ -146,8 +153,6 @@ module.exports = function(logger, Imap) {
     };
 
     var openBox = function(imap, mailbox, callback) {
-        var fetch;
-
         imap.openBox(mailbox, true, function(err, openBox) {
             if (err) {
                 callback(err);
@@ -158,9 +163,8 @@ module.exports = function(logger, Imap) {
             logger.debug('%s have %d total and %d new messages', mailbox, openBox.messages.total, openBox.messages.new);
 
             if (openBox.messages.total > 0) {
-                fetch = imap.seq.fetch('1:*', {struct: true, bodies: ''});
                 async.waterfall([
-                    fetchFromBox.bind(null, imap, fetch),
+                    fetch.bind(null, imap, '1:*'),
                     parseMessages
                 ], function(err, result) {
                     if (err) {
@@ -183,25 +187,35 @@ module.exports = function(logger, Imap) {
         });
     };
 
-    var searchBox = function(imap, uid, callback) {
-        var fetch;
+    // var searchBox = function(imap, uid, callback) {
+    //     var searchCriteria = ['UID'].concat(uid);
 
-        imap.search(['ALL', ['UID', uid]], function(err, result) {
+    //     imap.search(['ALL', searchCriteria], function(err, result) {
+    //         if (err) {
+    //             callback(err);
+    //             return;
+    //         }
+    //         callback(null, result);
+    //     });
+    // };
+
+    var addFlag = function(imap, uid, flag, callback) {
+        imap.addFlags(uid, flag, function (err) {
             if (err) {
                 callback(err);
                 return;
             }
-            fetch = imap.seq.fetch(result, {struct: true, bodies: ''});
-            async.waterfall([
-                fetchFromBox.bind(null, imap, fetch),
-                parseMessages
-            ], function(err, result) {
-                if (err) {
-                    callback(err);
-                    return;
-                }
-                callback(null, result);
-            });
+            callback(null, null);
+        });
+    };
+
+    var moveMessages = function(imap, uid, box, callback) {
+        imap.move(uid, box, function (err) {
+            if (err) {
+                callback(err);
+                return;
+            }
+            callback(null, null);
         });
     };
 
@@ -209,14 +223,14 @@ module.exports = function(logger, Imap) {
         var deferred = Q.defer(),
             imap = setupImap(username, password);
 
-        async.series([
+        async.waterfall([
             connectAndGetMailBoxes.bind(null, imap, box || defaultBox),
             disconnect.bind(null, imap)
         ], function(err, result) {
             if (err) {
                 deferred.reject(err.message);
             } else {
-                deferred.resolve(result[0]);
+                deferred.resolve(result);
             }
         });
 
@@ -227,23 +241,51 @@ module.exports = function(logger, Imap) {
         var deferred = Q.defer(),
             imap = setupImap(username, password);
 
-        async.series([
+        async.waterfall([
             connect.bind(null, imap, box || defaultBox),
-            searchBox.bind(null, imap, uid),
+            fetch.bind(null, imap, uid),
+            parseMessages,
             disconnect.bind(null, imap)
         ], function(err, result) {
             if (err) {
                 deferred.reject(err.message);
             } else {
-                deferred.resolve(result[1].shift());
+                deferred.resolve(result.shift());
             }
         });
 
         return deferred.promise;
     };
 
+    var deleteMessages = function(username, password, uid, box) {
+        var imap = setupImap(username, password);
+
+        if (box === 'Trash') {
+            async.waterfall([
+                connect.bind(null, imap, box || defaultBox),
+                addFlag.bind(null, imap, uid, 'Deleted'),
+                disconnect.bind(null, imap)
+            ], function(err) {
+                if (err) {
+                    logger.error('Failed to delete message: %s', err.message);
+                }
+            });
+        } else {
+            async.waterfall([
+                connect.bind(null, imap, box || defaultBox),
+                moveMessages.bind(null, imap, uid, 'Trash'),
+                disconnect.bind(null, imap)
+            ], function(err) {
+                if (err) {
+                    logger.error('Failed to delete message: %s', err.message);
+                }
+            });
+        }
+    };
+
     return {
         getOneMessage: getOneMessage,
-        getAllMessages: getAllMessages
+        getAllMessages: getAllMessages,
+        deleteMessages: deleteMessages
     };
 };

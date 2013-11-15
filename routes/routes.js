@@ -60,6 +60,12 @@ module.exports = function(app, passport, Profiles, logger) {
         });
     });
 
+    app.delete('/message/:mailbox/:uid', ensureAuthenticated, function(req, resp) {
+        ReceiveMail.deleteMessages(req.user.username, req.user.password, req.params.uid, req.params.mailbox);
+        // ReceiveMail.deleteMessages(config.imap.user, config.imap.password, req.params.uid, req.params.mailbox);
+        resp.send(200);
+    });
+
     app.post('/sendmail', ensureAuthenticated, function(req, resp) {
         var reqParams = req.body,
             mail = SendMail.sendMail(req.user.username, req.user.password, reqParams.from, reqParams.to, reqParams.cc, reqParams.subject, reqParams.text);

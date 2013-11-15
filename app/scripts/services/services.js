@@ -7,7 +7,7 @@ angular.module('svardMailApp')
     }])
 
     .factory('Mail', ['$resource', function ($resource) {
-        return $resource('/message/:mailbox/:uid');
+        return $resource('/message/:mailbox/:uid', {});
         // return $resource('../../mails/:uid.json', {});
     }])
 

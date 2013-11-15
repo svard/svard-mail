@@ -1,7 +1,7 @@
 <thead>
     <tr>
         <th class="content-left">
-            <button title="Move selected to trash"><span class="icon-trash"></span></button>
+            <button title="Move selected to trash" ng-click="deleteMail()"><span class="icon-trash"></span></button>
         </th>
         <th class="content-left from">From <i class="icon-sort" ng-click="sortBy('from.name')"></i></th>
         <th class="content-left subject">Subject <i class="icon-sort" ng-click="sortBy('subject')"></i></th>
@@ -9,9 +9,9 @@
         <th></th>
     </tr>
 </thead>
-<tbody ng-repeat="message in messages | orderBy:sortingOrder:reverse" ng-controller="TableRowCtrl" ng-switch on="isPreviewSelected()">
+<tbody ng-repeat="message in box.selectedMailBoxContent.messages | orderBy:sortingOrder:reverse" ng-controller="TableRowCtrl" ng-switch on="isPreviewSelected()">
     <tr  ng-class="isUnseen()">
-        <td><input type="checkbox" /></td>
+        <td><input type="checkbox" ng-model="message.delete" /></td>
         <td>{{message.from.name}}</td>
         <td ng-click="readMail()"><span class="svard-mail-clickable">{{message.subject}}</span></td>
         <td>{{message.date | date:'MMM d, HH:mm:ss'}}</td>
