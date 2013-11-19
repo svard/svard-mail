@@ -126,6 +126,24 @@ module.exports = function(logger, Imap) {
         });
     };
 
+    var moveSentMails = function(imap, box, username, msgs, callback) {        
+        async.filter(msgs.selectedMailBoxContent.messages, function(msg, callback) {
+            if (msg.from.address === username && box !== 'Sent') {
+                imap.move(msg.uid, 'Sent', function (err) {
+                    if (err) {
+                        logger.error('Failed to move mail to Sent folder: %s', err.message);
+                    }
+                    callback(false);
+                });
+            } else {
+                callback(true);
+            }
+        }, function(result) {
+            msgs.selectedMailBoxContent.messages = result;
+            callback(null, msgs);
+        });
+    };
+
     var fetch = function(imap, uid, callback) {
         var msgs = [],
             fetch = imap.fetch(uid, {struct: true, bodies: ''});
@@ -153,7 +171,7 @@ module.exports = function(logger, Imap) {
     };
 
     var openBox = function(imap, mailbox, callback) {
-        imap.openBox(mailbox, true, function(err, openBox) {
+        imap.openBox(mailbox, false, function(err, openBox) {
             if (err) {
                 callback(err);
                 return;
@@ -225,6 +243,7 @@ module.exports = function(logger, Imap) {
 
         async.waterfall([
             connectAndGetMailBoxes.bind(null, imap, box || defaultBox),
+            moveSentMails.bind(null, imap, box || defaultBox, username),
             disconnect.bind(null, imap)
         ], function(err, result) {
             if (err) {

@@ -27,6 +27,7 @@ module.exports = function(logger) {
             from: from,
             to: to,
             cc: cc,
+            bcc: from,
             subject: subject,
             text: text
         }, function (error, response) {
