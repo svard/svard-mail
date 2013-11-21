@@ -4,13 +4,6 @@ describe('Service: services', function () {
 
     // load the service's module
     beforeEach(module('svardMailApp'));
-    beforeEach(function() {
-        this.addMatchers({
-            toEqualData: function(expected) {
-                return angular.equals(this.actual, expected);
-            }
-        });
-    });
 
     // instantiate service
     var mailbox, profile, mailboxLoader, profileLoader, stubBackend;

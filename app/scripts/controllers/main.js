@@ -1,11 +1,23 @@
 'use strict';
 
 angular.module('svardMailApp')
-    .controller('MainCtrl', ['$scope', 'mailbox', function ($scope, mailbox) {
+    .controller('MainCtrl', ['$scope', 'mailbox', 'SearchMail', '$rootScope', function ($scope, mailbox, SearchMail, $rootScope) {
         $scope.clearMailbox = function () {
             $scope.box = null;
         };
 
+        $scope.searchMail = function () {
+            $scope.box.selectedMailBoxContent.messages = [];
+            $rootScope.$broadcast('loadingStarted');
+            SearchMail.search({mailbox: $scope.activeMailbox, query: $scope.search.query}, function (response) {
+                $scope.box.selectedMailBoxContent.messages = response;
+                $rootScope.$broadcast('loadingFinished');
+            });
+        };
+
+        $scope.search = {
+            query: ''
+        };
         $scope.box = mailbox;
     }])
 

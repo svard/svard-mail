@@ -16,7 +16,7 @@ describe('Directive: loader', function () {
         });
     });
 
-    var element, scope, $rootScope;
+    var element, scope, $rootScope, $window;
 
     beforeEach(inject(function ($compile, _$rootScope_) {
         $rootScope = _$rootScope_;
@@ -34,4 +34,20 @@ describe('Directive: loader', function () {
         $rootScope.$emit('$routeChangeSuccess');
         expect(element).toHaveClass('svard-mail-hide');
     });
+
+    it('should toggle loader visibilty on loading event', function () {
+        expect(element).toHaveClass('svard-mail-hide');
+
+        $rootScope.$emit('loadingStarted');
+        expect(element).not.toHaveClass('svard-mail-hide');
+
+        $rootScope.$emit('loadingFinished');
+        expect(element).toHaveClass('svard-mail-hide');
+    });
+
+    it('should calculate view port center', inject(function ($window) {
+        $window.innerHeight = 100;
+        $window.innerWidth = 100;
+        expect(scope.getViewportCenter()).toEqual({top: '30px', left: '30px'})
+    }));
 });

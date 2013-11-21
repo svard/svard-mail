@@ -2,13 +2,19 @@
 
 angular.module('svardMailApp')
     .factory('Mailbox', ['$resource', function ($resource) {
-        return $resource('/message/:mailbox');
+        return $resource('/message/:mailbox', {});
         // return $resource('../../mockmail.json');
     }])
 
     .factory('Mail', ['$resource', function ($resource) {
         return $resource('/message/:mailbox/:uid', {});
         // return $resource('../../mails/:uid.json', {});
+    }])
+
+    .factory('SearchMail', ['$resource', function ($resource) {
+        return $resource('/search', {}, {
+            search: {method: 'POST', isArray: true}
+        });
     }])
 
     .factory('Profile', ['$resource', function ($resource) {

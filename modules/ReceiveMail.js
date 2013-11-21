@@ -126,7 +126,7 @@ module.exports = function(logger, Imap) {
         });
     };
 
-    var moveSentMails = function(imap, box, username, msgs, callback) {        
+    var moveSentMails = function(imap, box, username, msgs, callback) {
         async.filter(msgs.selectedMailBoxContent.messages, function(msg, callback) {
             if (msg.from.address === username && box !== 'Sent') {
                 imap.move(msg.uid, 'Sent', function (err) {
@@ -205,17 +205,27 @@ module.exports = function(logger, Imap) {
         });
     };
 
-    // var searchBox = function(imap, uid, callback) {
-    //     var searchCriteria = ['UID'].concat(uid);
+    var searchAll = function(imap, searchString, callback) {
+        var searchCriteria = ['TEXT'].concat(searchString);
 
-    //     imap.search(['ALL', searchCriteria], function(err, result) {
-    //         if (err) {
-    //             callback(err);
-    //             return;
-    //         }
-    //         callback(null, result);
-    //     });
-    // };
+        if (searchString !== '') {
+            imap.search(['ALL', searchCriteria], function(err, result) {
+                if (err) {
+                    callback(err);
+                    return;
+                }
+                callback(null, result);
+            });
+        } else {
+            imap.search(['ALL'], function(err, result) {
+                if (err) {
+                    callback(err);
+                    return;
+                }
+                callback(null, result);
+            });
+        }
+    };
 
     var addFlag = function(imap, uid, flag, callback) {
         imap.addFlags(uid, flag, function (err) {
@@ -302,9 +312,31 @@ module.exports = function(logger, Imap) {
         }
     };
 
+    var searchMessages = function(username, password, searchString, box) {
+        var deferred = Q.defer(),
+            imap = setupImap(username, password);
+
+        async.waterfall([
+            connect.bind(null, imap, box || defaultBox),
+            searchAll.bind(null, imap, searchString),
+            fetch.bind(null, imap),
+            parseMessages,
+            disconnect.bind(null, imap)
+        ], function(err, result) {
+            if (err) {
+                deferred.reject(err.message);
+            } else {
+                deferred.resolve(result);
+            }
+        });
+
+        return deferred.promise;
+    };
+
     return {
         getOneMessage: getOneMessage,
         getAllMessages: getAllMessages,
-        deleteMessages: deleteMessages
+        deleteMessages: deleteMessages,
+        searchMessages: searchMessages
     };
 };

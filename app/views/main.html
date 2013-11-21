@@ -19,11 +19,11 @@
                 </div>
                 <div class="svard-mail-search large-30 medium-40 small-40">
                     <form class="ink-form">
-                        <fieldset disabled>
+                        <fieldset>
                             <div class="control-group">
                                 <div class="control append-button">
-                                    <span><input type="text" placeholder="Search mail"></span>
-                                    <button class="ink-button"><i class="icon-search"></i></button>
+                                    <span><input type="text" placeholder="Search mail" ng-model="search.query"></span>
+                                    <button class="ink-button" ng-click="searchMail()"><i class="icon-search"></i></button>
                                 </div>
                             </div>
                         </fieldset>

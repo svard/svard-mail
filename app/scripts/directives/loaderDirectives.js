@@ -17,6 +17,14 @@ angular.module('svardMailApp')
                     element.addClass('svard-mail-hide');
                 });
 
+                $rootScope.$on('loadingStarted', function () {
+                    element.removeClass('svard-mail-hide');
+                });
+
+                $rootScope.$on('loadingFinished', function () {
+                    element.addClass('svard-mail-hide');
+                });
+
                 scope.getViewportCenter = function () {
                     var top = ($window.innerHeight / 2) - 20,
                         left = ($window.innerWidth / 2) - 20;

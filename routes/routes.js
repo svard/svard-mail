@@ -66,6 +66,15 @@ module.exports = function(app, passport, Profiles, logger) {
         resp.send(200);
     });
 
+    app.post('/search', ensureAuthenticated, function(req, resp) {
+        ReceiveMail.searchMessages(req.user.username, req.user.password, req.body.query, req.body.mailbox).then(function (messages) {
+        // ReceiveMail.searchMessages(config.imap.user, config.imap.password, req.body.query, req.body.mailbox).then(function (messages) {
+            resp.send(messages);
+        }, function() {
+            resp.send(500);
+        });
+    });
+
     app.post('/sendmail', ensureAuthenticated, function(req, resp) {
         var reqParams = req.body,
             mail = SendMail.sendMail(req.user.username, req.user.password, reqParams.from, reqParams.to, reqParams.cc, reqParams.subject, reqParams.text);
