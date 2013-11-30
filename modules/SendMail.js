@@ -29,7 +29,8 @@ module.exports = function(logger) {
             cc: cc,
             bcc: from,
             subject: subject,
-            text: text
+            html: text,
+            generateTextFromHTML: true
         }, function (error, response) {
             if (!error) {
                 logger.debug('Mail sent: %s', response.message);

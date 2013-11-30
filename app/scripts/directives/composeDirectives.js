@@ -14,12 +14,6 @@ angular.module('svardMailApp')
                     return;
                 }
 
-                ctrl.$parsers.unshift(function (value) {
-                    if (value !== null) {
-                        return value.replace(/&gt;/g, '>').replace(/<div>/g, '\n').replace(/<\/div>/g, '').replace(/<br>/g, '\n');
-                    }
-                });
-
                 editableEl.on('keyup change', function() {
                     $scope.$apply(function() {
                         ctrl.$setViewValue(editableEl.html());
