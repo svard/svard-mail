@@ -1,5 +1,9 @@
+@import "__mixins.less";
+
 #svard-mail-compose {
     &-body {
+        border: 1px solid #c4c4c4;
+        .border-radius(4px);
         height: 300px;
     }
 
@@ -25,7 +29,7 @@
 
     &-editable {
         height: 100%;
-        padding: 0 5px 0 5px;
+        padding: 8px 6px;
         overflow: auto;
         white-space: pre;
     }
